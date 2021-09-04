@@ -1,0 +1,39 @@
+{
+  "name": "vuety",
+  "version": "1.0.0",
+  "description": "Dedicated Vue IDE",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wachka06/Vuety.git"
+  },
+  "keywords": [],
+  "authors": [
+    {
+      "name": "Brandon Bowers"
+    },
+    {
+      "name": "Graham Pierce"
+    },
+    {
+      "name": "Natsuki Wada"
+    }
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wachka06/Vuety/issues"
+  },
+  "homepage": "https://github.com/wachka06/Vuety#readme",
+  "devDependencies": {
+    "css-loader": "^6.2.0",
+    "sass-loader": "^12.1.0",
+    "style-loader": "^3.2.1",
+    "webpack": "^5.52.0"
+  },
+  "dependencies": {
+    "vue": "^3.2.8"
+  }
+}
