@@ -1,5 +1,6 @@
 const path = require('path');
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const { VueLoaderPlugin } = require('vue-loader');
+
 // Codemirror Plugin
 
 module.exports = {
@@ -16,8 +17,20 @@ module.exports = {
   //   __filename: false
   // },
   mode: process.env.NODE_ENV,
+  // resolve: {
+  //   extensions: [".js", ".vue"], // .js, .vue をimport可能に
+  //   modules: ["node_modules"], // node_modulesディレクトリからも import できるようにする
+  //   alias: {
+  //     // vue-template-compilerに読ませてコンパイルするために必要な設定
+  //     vue$: 'vue/dist/vue.esm.js',
+  //   },
+  // },
   module: {
     rules: [
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader'
+      },
       {
         test: /\.js?$/,
         exclude: /(node_modules)/,
@@ -27,10 +40,6 @@ module.exports = {
             presets: ['@babel/preset-env']
           },
         }
-      },
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader'
       },
       {
         test: /\.(sa|sc|c)ss$/,
@@ -43,9 +52,15 @@ module.exports = {
       }
     ]
   },
+  resolve: {
+    extensions: [ '.tsx', '.ts', '.js', '.vue' ],
+    alias: {
+        'vue': '@vue/runtime-dom'
+    }
+  },
   // need the research for codemirror plugin! 
   plugins: [
-    new VueLoaderPlugin(),
+    new VueLoaderPlugin()
   ],
   devServer: {
     // hot: true,
