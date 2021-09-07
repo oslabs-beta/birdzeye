@@ -17,14 +17,6 @@ module.exports = {
   //   __filename: false
   // },
   mode: process.env.NODE_ENV,
-  // resolve: {
-  //   extensions: [".js", ".vue"], // .js, .vue をimport可能に
-  //   modules: ["node_modules"], // node_modulesディレクトリからも import できるようにする
-  //   alias: {
-  //     // vue-template-compilerに読ませてコンパイルするために必要な設定
-  //     vue$: 'vue/dist/vue.esm.js',
-  //   },
-  // },
   module: {
     rules: [
       {
