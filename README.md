@@ -1,2 +1,1 @@
-# Vuety
-Dedicated Vue IDE
+Readme
