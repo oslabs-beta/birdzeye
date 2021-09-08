@@ -1,6 +1,5 @@
 <template>
-  <div>
-  </div>
+  <h2>hell word</h2>
 </template>
 
 <script>
@@ -14,5 +13,7 @@ export default {
 </script>
 
 <style scoped>
-  
+  h2 {
+    color: wheat;
+  }
 </style>
