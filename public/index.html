@@ -4,11 +4,45 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <!-- <link rel="icon" href="<%= BASE_URL %>favicon.ico"> -->
+    <link rel="stylesheet" href="../node_modules/xterm/css/xterm.css" />
+    <!-- <script src="../node_modules/xterm/lib/xterm.js"></script> -->
     <title>Vuety</title>
   </head>
   <body>
     <div id="app"></div>
-    <!-- built files will be auto injected -->
+    <!-- <div id="terminal"></div> -->
+    
+    <script>
+      // import Terminal from '../node_modules/xterm/lib/xterm.js';
+      // var term = new Terminal();
+      
+//       var os = require('os');
+// var pty = require('node-pty');
+
+// var shell = os.platform() === 'win32' ? 'powershell.exe' : 'bash';
+
+// var ptyProcess = pty.spawn(shell, [], {
+//   name: 'xterm-color',
+//   cols: 80,
+//   rows: 30,
+//   cwd: process.env.HOME,
+//   env: process.env
+// });
+
+// ptyProcess.on('data', function(data) {
+//   process.stdout.write(data);
+// });
+
+// ptyProcess.write('ls\r');
+// ptyProcess.resize(100, 40);
+// ptyProcess.write('ls\r');
+// term.open(document.getElementById('terminal'));
+// term.write('Hello')
+// term.onData((e) =>{
+//   term.write(e);
+// }) 
+    </script>
+    
   </body>
 </html>

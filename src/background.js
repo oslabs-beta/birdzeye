@@ -1,10 +1,13 @@
 'use strict'
 
-import { app, protocol, BrowserWindow } from 'electron'
+import { app, protocol, BrowserWindow, ipcMain } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS3_DEVTOOLS } from 'electron-devtools-installer'
+// import Terminal from '../node_modules/xterm/lib/xterm.js'
+var os = require('os');
+var pty = require('node-pty');
 const isDevelopment = process.env.NODE_ENV !== 'production'
-
+var shell = os.platform() === 'win32' ? 'powershell.exe' : 'zsh';
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
   { scheme: 'app', privileges: { secure: true, standard: true } }
@@ -50,6 +53,29 @@ app.on('activate', () => {
   if (BrowserWindow.getAllWindows().length === 0) createWindow()
 })
 
+
+
+// var term = new Terminal();
+// term.open(document.getElementById('terminal'));
+// term.write('Hello')
+// term.onData((e) =>{
+//   term.write(e);
+// })
+// var ptyProcess = pty.spawn(shell, [], {
+//   name: 'xterm-color',
+//   cols: 80,
+//   rows: 30,
+//   cwd: process.env.HOME,
+//   env: process.env
+// });
+
+// ptyProcess.onData('data', function(data) {
+//   process.stdout.write(data);
+// });
+
+// ptyProcess.write('ls\r');
+// ptyProcess.resize(100, 40);
+// ptyProcess.write('ls\r');
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
