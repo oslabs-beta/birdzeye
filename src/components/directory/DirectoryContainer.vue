@@ -1,7 +1,6 @@
 <template>
   <div>
     <DirectoryList>Directory List</DirectoryList>
-    <button>This is a button</button>
   </div>
 </template>
 

@@ -1,7 +1,7 @@
 <template>
   <div>
     <directory>Directory</directory>
-    <button>Another Button</button>
+    <!-- <directory v-for="directory in directories">{{ filename}}</directory> -->
   </div>
 </template>
 
@@ -12,5 +12,8 @@ export default {
   components: {
     Directory,
   },
+  data() {},
+  computed: {},
+  methods: {},
 };
 </script>
