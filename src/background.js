@@ -4,10 +4,10 @@ import { app, protocol, BrowserWindow, ipcMain } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS3_DEVTOOLS } from 'electron-devtools-installer'
 // import Terminal from '../node_modules/xterm/lib/xterm.js'
-var os = require('os');
-var pty = require('node-pty');
-const isDevelopment = process.env.NODE_ENV !== 'production'
-var shell = os.platform() === 'win32' ? 'powershell.exe' : 'zsh';
+// const os = require('os');
+// const pty = require('node-pty');
+// const shell = os.platform() === 'win32' ? 'powershell.exe' : 'zsh';
+const isDevelopment = process.env.NODE_ENV !== 'production';
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
   { scheme: 'app', privileges: { secure: true, standard: true } }
@@ -53,7 +53,7 @@ app.on('activate', () => {
   if (BrowserWindow.getAllWindows().length === 0) createWindow()
 })
 
-
+app.allowRendererProcessReuse = false;
 
 // var term = new Terminal();
 // term.open(document.getElementById('terminal'));
@@ -61,7 +61,8 @@ app.on('activate', () => {
 // term.onData((e) =>{
 //   term.write(e);
 // })
-// var ptyProcess = pty.spawn(shell, [], {
+
+// const ptyProcess = pty.spawn(shell, [], {
 //   name: 'xterm-color',
 //   cols: 80,
 //   rows: 30,
@@ -70,12 +71,16 @@ app.on('activate', () => {
 // });
 
 // ptyProcess.onData('data', function(data) {
-//   process.stdout.write(data);
+//   // process.stdout.write(data);
+//   Window.webContent.send('terminal.incData', data);
 // });
-
+// ipcMain.on('terminal.toTerm', function(event, data) {
+//   ptyProcess.write(data);
+// })
 // ptyProcess.write('ls\r');
 // ptyProcess.resize(100, 40);
 // ptyProcess.write('ls\r');
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
