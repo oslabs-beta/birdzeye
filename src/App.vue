@@ -1,13 +1,13 @@
 <template>
-  <h2>hell word</h2>
+  <TheTextEditorContainer />
 </template>
 
 <script>
-// import TheTextEditorContainer from './textEditor/TheTextEditorContainer.vue';
+import TheTextEditorContainer from './components/textEditor/TheTextEditorContainer.vue';
 
 export default {
   components: {
-    // TheTextEditorContainer,
+    TheTextEditorContainer,
   }
 }
 </script>

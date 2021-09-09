@@ -1,9 +1,18 @@
 <template>
-  <h2>TheTextEditorContainer</h2>
+  <TheTextEditor />
+  <TheToggleTerminal />
 </template>
 
 <script>
-export default {};
+import TheTextEditor from './TheTextEditor.vue';
+import TheToggleTerminal from './TheToggleTerminal.vue';
+
+export default {
+  components: {
+    TheTextEditor,
+    TheToggleTerminal
+  }
+};
 </script>
 
 <style scoped>
