@@ -9,20 +9,14 @@
 <script>
 // import TheTextEditorContainer from './textEditor/TheTextEditorContainer.vue';
 import TheTerminalContainer from './components/terminal/TheTerminalContainer.vue';
-  // import { Terminal } from 'xterm';
+  
       
 export default {
   components: {
     // TheTextEditorContainer,
     TheTerminalContainer,
   },
-  // mounted: {
-  //   openTerm() {
-  //     const term = new Terminal();
-  //     term.open(this.$refs.terminal);
-  //     term.write('Hello')
-  //   }
-  // }
+  
 }
 </script>
 
