@@ -26,6 +26,7 @@ async function createWindow() {
       contextIsolation: !process.env.ELECTRON_NODE_INTEGRATION,
       //added by BMB
       enableRemoteModule: false,
+      sandbox: true,
       // __static is set by webpack and will point to the public directory
       preload: path.resolve(__static, "preload.js"),
     },
@@ -89,6 +90,49 @@ if (isDevelopment) {
 
 //Added by BMB
 ipcMain.on("READ_FILE", (event, payload) => {
-  const content = fs.readdirSync(payload.path);
-  event.reply("READ_FILE", { content });
+  // switch(payload.path){
+  //   case `./`:{
+  //     const contentFiles = fs.readdirSync(payload.path);
+  //     event.reply("READ_FILE", { contentFiles })
+  //   }
+  // }
+
+  // if (fs.stats.isDirectory(payload.path)){
+  //   const content = fs.readdirSync(payload.path);
+  //   event.reply("READ_FILE", { content });
+  // }
+  // else {
+  //   const content = fs.readdirSync(payload.path);
+  //   event.reply("READ_FILE", { content })
+  // }
+
+  const contentFiles = fs
+    .readdirSync(payload.path, { withFileTypes: true })
+    .filter((dirent) => dirent.isFile())
+    .map((dirent) => dirent.name);
+  event.reply("READ_FILE", { contentFiles });
+});
+
+ipcMain.on("READ_DIRECTORY", (event, payload) => {
+  // switch(payload.path){
+  //   case `./`:{
+  //     const contentFiles = fs.readdirSync(payload.path);
+  //     event.reply("READ_FILE", { contentFiles })
+  //   }
+  // }
+
+  // if (fs.stats.isDirectory(payload.path)){
+  //   const content = fs.readdirSync(payload.path);
+  //   event.reply("READ_FILE", { content });
+  // }
+  // else {
+  //   const content = fs.readdirSync(payload.path);
+  //   event.reply("READ_FILE", { content })
+  // }
+
+  const contentFiles = fs
+    .readdirSync(payload.path)
+    .filter((dirent) => dirent.isDirectory())
+    .map((dirent) => dirent.name);
+  event.reply("READ_DIRECTORY", { contentFiles });
 });

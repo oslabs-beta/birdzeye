@@ -1,4 +1,7 @@
 export default {
+  fetchAllDirectories(context) {
+    context.commit("fetchAllDirectories");
+  },
   addDirectory(context) {
     context.commit("addDirectory");
   },

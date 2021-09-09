@@ -1,6 +1,6 @@
 const { contextBridge, ipcRenderer } = require("electron");
 
-const validChannels = ["READ_FILE", "WRITE_FILE"];
+const validChannels = ["READ_FILE", "READ_DIRECTORY", "WRITE_FILE"];
 
 contextBridge.exposeInMainWorld("ipc", {
   send: (channel, data) => {

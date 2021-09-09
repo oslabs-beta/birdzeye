@@ -1,4 +1,8 @@
 // export default {
+//   fetchAllDirectories(state, payload){
+
+//   },
+
 //   addDirectory(state, payload) {
 
 //   },
