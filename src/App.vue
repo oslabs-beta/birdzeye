@@ -1,19 +1,19 @@
 <template>
   <div>
   <h2>hell word</h2>
-  
+  <TheTextEditorContainer />
   <TheTerminalContainer />
   </div>
 </template>
 
 <script>
-// import TheTextEditorContainer from './textEditor/TheTextEditorContainer.vue';
+import TheTextEditorContainer from './components/textEditor/TheTextEditorContainer.vue';
 import TheTerminalContainer from './components/terminal/TheTerminalContainer.vue';
   
       
 export default {
   components: {
-    // TheTextEditorContainer,
+    TheTextEditorContainer,
     TheTerminalContainer,
   },
   
@@ -25,6 +25,6 @@ export default {
     color: wheat;
   }
   div {
-    color: white;
+    color: black;
   }
 </style>
