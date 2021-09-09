@@ -14,6 +14,7 @@
   },
   "main": "background.js",
   "dependencies": {
+    "codemirror": "^5.62.3",
     "core-js": "^3.6.5",
     "node-pty": "^0.10.1",
     "vue": "^3.0.0",
