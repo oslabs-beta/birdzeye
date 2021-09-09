@@ -40,7 +40,10 @@
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {}
+    "rules": {},
+    "globals": {
+      "__static": "readonly"
+    }
   },
   "browserslist": [
     "> 1%",

@@ -2,6 +2,9 @@
   <img alt="Vue logo" src="./assets/logo.png" />
   <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
   <DirectoryContainer></DirectoryContainer>
+  <button @click="getDirectories('/root')">
+    Get all directories
+  </button>
 </template>
 
 <script>
@@ -10,6 +13,12 @@ import DirectoryContainer from "./components/directory/DirectoryContainer.vue";
 
 export default {
   name: "App",
+  mounted() {
+    // handle reply from the backend
+    window.ipc.on("READ_FILE", (payload) => {
+      console.log(payload.content);
+    });
+  },
   components: {
     DirectoryContainer,
     // TextEditorContainer,
@@ -17,6 +26,13 @@ export default {
     // TerminalContainer,
     // SimulatorContainer,
     // TabContainer
+  },
+  methods: {
+    getDirectories(path) {
+      // ask backend to read file
+      const payload = { path };
+      window.ipc.send("READ_FILE", payload);
+    },
   },
 };
 </script>

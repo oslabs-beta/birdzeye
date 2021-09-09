@@ -1,1 +1,5 @@
-export default {};
+export default {
+  getAllDirectories(state) {
+    return state.allDirectories;
+  },
+};
