@@ -1,6 +1,7 @@
 <template>
   <div>
-  <h2>hell word</h2>
+  <h2>Vuety</h2>
+  <TheSimulatorContainer />
   <TheTextEditorContainer />
   <TheTerminalContainer />
   </div>
@@ -9,12 +10,14 @@
 <script>
 import TheTextEditorContainer from './components/textEditor/TheTextEditorContainer.vue';
 import TheTerminalContainer from './components/terminal/TheTerminalContainer.vue';
+import TheSimulatorContainer from './components/simulator/TheSimulatorContainer.vue';
   
       
 export default {
   components: {
     TheTextEditorContainer,
     TheTerminalContainer,
+    TheSimulatorContainer,
   },
   
 }
