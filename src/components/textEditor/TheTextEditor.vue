@@ -6,7 +6,8 @@
 import * as Codemirror from 'codemirror';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/dracula.css';
-import 'codemirror/mode/javascript/javascript.js';
+// import 'codemirror/mode/javascript/javascript.js';
+import 'codemirror/mode/vue/vue.js';
 import 'codemirror/addon/hint/show-hint.js';
 import 'codemirror/addon/hint/show-hint.css';
 import 'codemirror/addon/hint/javascript-hint.js';
@@ -14,19 +15,19 @@ import 'codemirror/addon/hint/javascript-hint.js';
 export default {
   data() {
     return {
-      content: 'Welcome to Veuty',
+      // content: 'Welcome to Vuety',
     };
   },
   mounted() {
     this.cm = Codemirror.fromTextArea(document.getElementById('editor'), {
       lineNumbers: true,
       theme: 'dracula',
-      mode: 'javascript',
+      mode: 'vue',
       showHint: true,
       lineWrapping: true,
       styleActiveLine: true,
     });
-    this.cm.setSize('80%', '400');
+    this.cm.setSize('100%', '400');
   },
 };
 </script>
