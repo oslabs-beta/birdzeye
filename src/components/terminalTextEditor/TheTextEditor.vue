@@ -1,5 +1,7 @@
 <template>
-  <textarea v-model="content" id="editor"></textarea>
+  <section>
+    <textarea ref="editor"></textarea>
+  </section>
 </template>
 
 <script>
@@ -15,11 +17,11 @@ import 'codemirror/addon/hint/javascript-hint.js';
 export default {
   data() {
     return {
-      // content: 'Welcome to Vuety',
+      //content: 'Welcome to Vuety',
     };
   },
   mounted() {
-    this.cm = Codemirror.fromTextArea(document.getElementById('editor'), {
+    this.cm = Codemirror.fromTextArea(this.$refs.editor, {
       lineNumbers: true,
       theme: 'dracula',
       mode: 'vue',
