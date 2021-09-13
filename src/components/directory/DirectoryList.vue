@@ -21,12 +21,16 @@ export default {
   mounted() {
     // handle reply from the backend
     window.ipc.on("READ_DIRECTORY", (payload) => {
-      this.allDirectories = Object.values(payload.content);
+      this.allDirectories = payload.contentFiles;
+      // console.log("this.allDirectories :", this.allDirectories);
     }),
       window.ipc.on("READ_FILE", (payload) => {
-        this.allFiles = Object.values(payload.content);
+        this.allFiles = payload.contentFiles;
+        console.log("this.allFiles :", this.allFiles);
       });
+
     this.getDirectories("./");
+    // console.log("this.allDirectories :", typeof this.allDirectories);
     this.getFiles("./");
   },
   components: {

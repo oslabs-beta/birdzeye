@@ -89,50 +89,57 @@ if (isDevelopment) {
 }
 
 //Added by BMB
+// ipcMain.on("READ_FILE", (event, payload) => {
+//   const contentFiles = fs
+//     .readdirSync(payload.path, { withFileTypes: true })
+//     .filter((dirent) => fs.lstatSync(dirent.name).isFile())
+//     .map((dirent) => dirent.name);
+//   event.reply("READ_FILE", { contentFiles });
+// });
+
+ipcMain.on("READ_DIRECTORY", (event, payload) => {
+  const contentFiles = [];
+  let grabFiles = fs.readdirSync(payload.path, { withFileTypes: true });
+  for (let fileObj of grabFiles) {
+    if (fs.lstatSync(fileObj.name).isDirectory()) {
+      contentFiles.push(fileObj.name);
+    }
+  }
+  event.reply("READ_DIRECTORY", { contentFiles });
+});
+
 ipcMain.on("READ_FILE", (event, payload) => {
-  // switch(payload.path){
-  //   case `./`:{
-  //     const contentFiles = fs.readdirSync(payload.path);
-  //     event.reply("READ_FILE", { contentFiles })
-  //   }
-  // }
-
-  // if (fs.stats.isDirectory(payload.path)){
-  //   const content = fs.readdirSync(payload.path);
-  //   event.reply("READ_FILE", { content });
-  // }
-  // else {
-  //   const content = fs.readdirSync(payload.path);
-  //   event.reply("READ_FILE", { content })
-  // }
-
-  const contentFiles = fs
-    .readdirSync(payload.path, { withFileTypes: true })
-    .filter((dirent) => dirent.isFile())
-    .map((dirent) => dirent.name);
+  const contentFiles = [];
+  let grabFiles = fs.readdirSync(payload.path, { withFileTypes: true });
+  for (let fileObj of grabFiles) {
+    if (fs.lstatSync(fileObj.name).isFile()) {
+      contentFiles.push(fileObj.name);
+    }
+  }
+  console.log("contentFiles", contentFiles);
   event.reply("READ_FILE", { contentFiles });
 });
 
-ipcMain.on("READ_DIRECTORY", (event, payload) => {
-  // switch(payload.path){
-  //   case `./`:{
-  //     const contentFiles = fs.readdirSync(payload.path);
-  //     event.reply("READ_FILE", { contentFiles })
-  //   }
-  // }
-
-  // if (fs.stats.isDirectory(payload.path)){
-  //   const content = fs.readdirSync(payload.path);
-  //   event.reply("READ_FILE", { content });
-  // }
-  // else {
-  //   const content = fs.readdirSync(payload.path);
-  //   event.reply("READ_FILE", { content })
-  // }
-
+ipcMain.on("READ_SUBFILE", (event, payload) => {
   const contentFiles = fs
-    .readdirSync(payload.path)
-    .filter((dirent) => dirent.isDirectory())
+    .readdirSync(payload.path, { withFileTypes: true })
+    .filter((dirent) => {
+      // console.log("dirent", dirent);
+      fs.lstatSync(dirent.name).isFile();
+      // console.log(fs.lstatSync(dirent.name).isDirectory());
+    })
+    .map((dirent) => dirent.name);
+  event.reply("READ_DIRECTORY", { contentFiles });
+});
+
+ipcMain.on("READ_SUBDIRECTORY", (event, payload) => {
+  const contentFiles = fs
+    .readdirSync(payload.path, { withFileTypes: true })
+    .filter((dirent) => {
+      // console.log("dirent", dirent);
+      fs.lstatSync(dirent.name).isDirectory();
+      // console.log(fs.lstatSync(dirent.name).isDirectory());
+    })
     .map((dirent) => dirent.name);
   event.reply("READ_DIRECTORY", { contentFiles });
 });

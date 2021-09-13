@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button>{{ filename }}</button>
+    <button>{{ fileName }}</button>
     <right-click-form>Right Click Form</right-click-form>
   </div>
 </template>
@@ -12,6 +12,9 @@ export default {
   props: ["fileName"],
   components: {
     RightClickForm,
+  },
+  data() {
+    return {};
   },
 };
 </script>

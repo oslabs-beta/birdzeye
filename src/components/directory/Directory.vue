@@ -22,14 +22,14 @@ import File from "./File.vue";
 export default {
   mounted() {
     // handle reply from the backend
-    window.ipc.on("READ_FILE", (payload) => {
-      this.allFiles = Object.values(payload.content);
+    window.ipc.on("READ_SUBFILE", (payload) => {
+      this.allFiles = payload.contentFiles;
     }),
-      window.ipc.on("READ_DIRECTORY", (payload) => {
-        this.allSubDirectories = Object.values(payload.content);
+      window.ipc.on("READ_SUBDIRECTORY", (payload) => {
+        this.allSubDirectories = payload.contentFiles;
       });
-    //   this.getSubDirectories(this.path);
-    // this.getFiles(this.path);
+    this.getSubDirectories(this.path);
+    this.getFiles(this.path);
   },
   props: ["directoryName", "parentPath"],
   components: {
@@ -50,18 +50,17 @@ export default {
       this.showFiles = !this.showFiles;
     },
     getSubDirectories(path) {
-      // const ignoreFiles = [`./dist_electron`, `./node_modules`, ]
-      // if (!ignoreFiles.includes(path)){
-      if (path === "./src") {
+      const ignoreFiles = [`./dist_electron`, `./node_modules`];
+      if (!ignoreFiles.includes(path)) {
         // ask backend to read file
         const payload = { path };
         window.ipc.send("READ_DIRECTORY", payload);
       }
     },
     getFiles(path) {
-      // const ignoreFiles = [`./dist_electron`, `./node_modules`, ]
-      // if (!ignoreFiles.includes(path)){
-      if (path === "./src") {
+      const ignoreFiles = [`./dist_electron`, `./node_modules`];
+      if (!ignoreFiles.includes(path)) {
+        // if (path === "./src") {
         // ask backend to read file
         const payload = { path };
         window.ipc.send("READ_FILE", payload);
