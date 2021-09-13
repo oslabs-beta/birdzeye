@@ -1,7 +1,5 @@
 <template>
-  <div>I will be a Terminal
   <div ref="terminal"></div>    
-  </div>
 </template>
 
 <script>
