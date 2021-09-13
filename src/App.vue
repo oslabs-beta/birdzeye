@@ -1,22 +1,20 @@
 <template>
   <div>
     <TheSimulatorContainer />
-    <TheTextEditorContainer />
-    <TheTerminalContainer />
+    <TheTerminalTextEditorContainer />
   </div>
 </template>
 
 <script>
 import TheSimulatorContainer from './components/simulator/TheSimulatorContainer.vue';
-import TheTextEditorContainer from './components/textEditor/TheTextEditorContainer.vue';
-import TheTerminalContainer from './components/terminal/TheTerminalContainer.vue';
+import TheTerminalTextEditorContainer from './components/terminalTextEditor/TheTerminalTextEditorContainer.vue';
+
   
       
 export default {
   components: {
     TheSimulatorContainer,
-    TheTextEditorContainer,
-    TheTerminalContainer,
+    TheTerminalTextEditorContainer,
   },
 }
 </script>
