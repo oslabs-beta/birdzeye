@@ -2,20 +2,25 @@
   <img alt="Vue logo" src="./assets/logo.png" />
   <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
   <DirectoryContainer></DirectoryContainer>
-  <button @click="getDirectories('')">
-    Get all directories
-  </button>
+  <div>
+    <TheSimulatorContainer />
+    <TheTerminalTextEditorContainer />
+  </div>
 </template>
 
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
 import DirectoryContainer from "./components/directory/DirectoryContainer.vue";
+import TheSimulatorContainer from "./components/simulator/TheSimulatorContainer.vue";
+import TheTerminalTextEditorContainer from "./components/terminalTextEditor/TheTerminalTextEditorContainer.vue";
 
 export default {
   name: "App",
 
   components: {
     DirectoryContainer,
+    TheSimulatorContainer,
+    TheTerminalTextEditorContainer,
     // TextEditorContainer,
     // ComponentTreeContainer,
     // TerminalContainer,
