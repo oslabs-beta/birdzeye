@@ -6,12 +6,14 @@
       v-for="file in allFiles"
       :key="file"
       :parent-path="path"
+      v-show="showFiles === true"
     ></file>
     <directory
       :directory-name="directory"
       v-for="directory in allSubDirectories"
       :key="directory"
       :parent-path="path"
+      v-show="showFiles === true"
     ></directory>
   </div>
 </template>
@@ -21,13 +23,18 @@ import File from "./File.vue";
 
 export default {
   mounted() {
-    // handle reply from the backend
+    // handle reply from the backend for files
     window.ipc.on("READ_SUBFILE", (payload) => {
-      this.allFiles = payload.contentFiles;
+      console.log("payload.contentFiles", payload.contentFiles);
+      if (payload.rootFileName === this.path)
+        this.allFiles.push(...payload.contentFiles);
     }),
+      // handle reply from the backend for directories
       window.ipc.on("READ_SUBDIRECTORY", (payload) => {
-        this.allSubDirectories = payload.contentFiles;
+        if (payload.rootDirectoryName === this.path)
+          this.allSubDirectories.push(...payload.contentFiles);
       });
+    //methods used to make request to backend
     this.getSubDirectories(this.path);
     this.getFiles(this.path);
   },
@@ -42,28 +49,29 @@ export default {
       allFiles: [],
       allSubDirectories: [],
       showFiles: false,
-      path: this.parentPath + this.directoryName,
+      path: this.parentPath + "/" + this.directoryName,
     };
   },
   methods: {
     toggleFiles() {
       this.showFiles = !this.showFiles;
     },
+
     getSubDirectories(path) {
-      const ignoreFiles = [`./dist_electron`, `./node_modules`];
+      const ignoreFiles = [`./dist_electron`, `./node_modules`, `./.git`];
+
       if (!ignoreFiles.includes(path)) {
         // ask backend to read file
         const payload = { path };
-        window.ipc.send("READ_DIRECTORY", payload);
+        window.ipc.send("READ_SUBDIRECTORY", payload);
       }
     },
+
     getFiles(path) {
-      const ignoreFiles = [`./dist_electron`, `./node_modules`];
+      const ignoreFiles = [`./dist_electron`, `./node_modules`, `./.git`];
       if (!ignoreFiles.includes(path)) {
-        // if (path === "./src") {
-        // ask backend to read file
         const payload = { path };
-        window.ipc.send("READ_FILE", payload);
+        window.ipc.send("READ_SUBFILE", payload);
       }
     },
   },

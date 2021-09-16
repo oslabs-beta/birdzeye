@@ -116,30 +116,41 @@ ipcMain.on("READ_FILE", (event, payload) => {
       contentFiles.push(fileObj.name);
     }
   }
-  console.log("contentFiles", contentFiles);
   event.reply("READ_FILE", { contentFiles });
 });
 
-ipcMain.on("READ_SUBFILE", (event, payload) => {
-  const contentFiles = fs
-    .readdirSync(payload.path, { withFileTypes: true })
-    .filter((dirent) => {
-      // console.log("dirent", dirent);
-      fs.lstatSync(dirent.name).isFile();
-      // console.log(fs.lstatSync(dirent.name).isDirectory());
-    })
-    .map((dirent) => dirent.name);
-  event.reply("READ_DIRECTORY", { contentFiles });
+ipcMain.on("READ_SUBDIRECTORY", (event, payload) => {
+  const contentFiles = [];
+  const rootDirectoryName = payload.path;
+  console.log("payload.path: ", payload.path);
+  let grabFiles = fs.readdirSync(rootDirectoryName, { withFileTypes: true });
+  console.log("grabFiles", grabFiles);
+  for (let fileObj of grabFiles) {
+    console.log("fileObj", fileObj);
+    let filePath = rootDirectoryName + "/" + fileObj.name;
+    console.log("filePath", filePath);
+    if (fs.lstatSync(filePath).isDirectory()) {
+      contentFiles.push(fileObj.name);
+      console.log("contentFiles", contentFiles);
+    }
+  }
+  event.reply("READ_SUBDIRECTORY", { contentFiles, rootDirectoryName });
 });
 
-ipcMain.on("READ_SUBDIRECTORY", (event, payload) => {
-  const contentFiles = fs
-    .readdirSync(payload.path, { withFileTypes: true })
-    .filter((dirent) => {
-      // console.log("dirent", dirent);
-      fs.lstatSync(dirent.name).isDirectory();
-      // console.log(fs.lstatSync(dirent.name).isDirectory());
-    })
-    .map((dirent) => dirent.name);
-  event.reply("READ_DIRECTORY", { contentFiles });
+ipcMain.on("READ_SUBFILE", (event, payload) => {
+  const contentFiles = [];
+  const rootFileName = payload.path;
+  // console.log("payload.path: ", payload.path);
+  let grabFiles = fs.readdirSync(rootFileName, { withFileTypes: true });
+  // console.log("grabFiles", grabFiles);
+  for (let fileObj of grabFiles) {
+    // console.log("fileObj", fileObj);
+    let filePath = rootFileName + "/" + fileObj.name;
+    // console.log("filePath", filePath);
+    if (fs.lstatSync(filePath).isFile()) {
+      contentFiles.push(fileObj.name);
+    }
+  }
+  // console.log("contentFiles", contentFiles);
+  event.reply("READ_SUBFILE", { contentFiles, rootFileName });
 });

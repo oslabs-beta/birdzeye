@@ -1,16 +1,18 @@
 <template>
-  <directory
-    :directory-name="directory"
-    v-for="directory in allDirectories"
-    :key="directory"
-    parent-path="./"
-  ></directory>
-  <file
-    :file-name="file"
-    v-for="file in allFiles"
-    :key="file"
-    parent-path="./"
-  ></file>
+  <div>
+    <directory
+      :directory-name="directory"
+      v-for="directory in allDirectories"
+      :key="directory"
+      parent-path="."
+    ></directory>
+    <file
+      :file-name="file"
+      v-for="file in allFiles"
+      :key="file"
+      parent-path="."
+    ></file>
+  </div>
 </template>
 
 <script>
