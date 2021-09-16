@@ -3,10 +3,6 @@
 import { app, protocol, BrowserWindow } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS3_DEVTOOLS } from 'electron-devtools-installer'
-// import Terminal from '../node_modules/xterm/lib/xterm.js'
-// const os = require('os');
-// const pty = require('node-pty');
-// const shell = os.platform() === 'win32' ? 'powershell.exe' : 'zsh';
 const isDevelopment = process.env.NODE_ENV !== 'production';
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
