@@ -21,3 +21,5 @@ contextBridge.exposeInMainWorld("ipc", {
     }
   },
 });
+
+// alert("It Worked!");

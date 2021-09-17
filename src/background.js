@@ -22,13 +22,15 @@ async function createWindow() {
     webPreferences: {
       // Use pluginOptions.nodeIntegration, leave this alone
       // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
-      nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION,
-      contextIsolation: !process.env.ELECTRON_NODE_INTEGRATION,
+      // nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION,
+      // contextIsolation: !process.env.ELECTRON_NODE_INTEGRATION,
+      nodeIntegration: true,
+      contextIsolation: false,
       //added by BMB
       enableRemoteModule: false,
       sandbox: true,
       // __static is set by webpack and will point to the public directory
-      preload: path.resolve(__static, "preload.js"),
+      preload: path.join(__static, "preload.js"),
     },
   });
 
