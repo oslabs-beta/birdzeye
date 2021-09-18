@@ -22,8 +22,8 @@ export default {
       if (cmp.components) {
         this.componentNameList.push(...Object.keys(cmp.components));
         for (const [cmpName, cmpDetails] of Object.entries(cmp.components)) {
-          console.log(cmpName, '......    key   ........')
-          console.log(cmpDetails, '......    val   ........')
+          // console.log(cmpName, '......    key   ........')
+          // console.log(cmpDetails, '......    val   ........')
           // // cmpDetails.parentCmpName = cmp.name || cmpName;
           // console.log(Object.keys(cmpDetails.components).length, '......        Objt .........')
           if (cmpDetails.components) {

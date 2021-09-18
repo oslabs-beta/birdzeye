@@ -1,5 +1,5 @@
 <template>
-  <iframe id="sim" src="projecturl"></iframe>
+  <iframe id="sim" :src="projecturl"></iframe>
 </template>
 
 <script>
@@ -11,7 +11,7 @@ export default {
   data() {
     return {
       display: 0,
-      projecturl: '',
+      projecturl: 'http://localhost:8081/',
     }
   },
   methods: {
