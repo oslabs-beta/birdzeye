@@ -1,16 +1,16 @@
 <template>   
   <button @click="setDisplay">Toggle</button>
-  <TheTerminal v-show="showTerm"/>
+  <!-- <TheTerminal v-show="showTerm"/> -->
   <TheTextEditor v-show="showText"/>
 </template>
 
 <script>
-import TheTerminal from './TheTerminal.vue';
+// import TheTerminal from './TheTerminal.vue';
 import TheTextEditor from './TheTextEditor.vue';
 
 export default {
   components: {
-    TheTerminal,
+    // TheTerminal,
     TheTextEditor,
   },
   data() {
@@ -29,7 +29,5 @@ export default {
 </script>
 
 <style scoped>
-  button {
-    
-  }
+  
 </style>

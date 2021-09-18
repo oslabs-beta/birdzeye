@@ -21,8 +21,7 @@
           const term = new Terminal();
           term.open(this.$refs.terminal);
           term.onData((e) => {
-            //   term.write(e);
-            // ipc.send('terminal.toTerm', e);
+            
             ptyProcess.write(e);
           })
           ipc.on('terminal.incData', function(event, data) {
@@ -32,13 +31,7 @@
             term.write(data);
           });
                
-        //   ptyProcess.onData('data', function(data) {
-        //     process.stdout.write(data);
-        //   });
-
-        // //   ptyProcess.write('ls\r');
-        //   ptyProcess.resize(100, 40);
-        //   ptyProcess.write('ls\r');
+        
         }, 
         data() {
             return {
