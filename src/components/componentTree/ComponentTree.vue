@@ -1,6 +1,6 @@
 <template>
- <h2>cmpName: {{ this.compName }}</h2>
-  <h2>cmp: {{ this.comp }}</h2>
+ <h2 :text="this.compName"></h2>
+  <h2 :text="this.comp"></h2>
 </template>
 
 <script>
