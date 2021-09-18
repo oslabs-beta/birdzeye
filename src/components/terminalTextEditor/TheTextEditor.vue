@@ -13,14 +13,23 @@ import "codemirror/mode/vue/vue.js";
 // import 'codemirror/addon/hint/show-hint.js';
 // import 'codemirror/addon/hint/show-hint.css';
 // import "codemirror/addon/hint/javascript-hint.js";
+// import activeDocument from '../../background.js';
 
 export default {
   data() {
     return {
+      activeDocument: '',
       //content: 'Welcome to Vuety',
     };
   },
   mounted() {
+    window.ipc.on("READ_FILE", (payload) => {
+        this.activeDocument = payload.contentFiles;
+        
+      });
+    this.getFiles('./src/App.vue');
+
+    
     this.cm = Codemirror.fromTextArea(this.$refs.editor, {
       lineNumbers: true,
       theme: "dracula",
@@ -28,9 +37,18 @@ export default {
       // showHint: true,
       lineWrapping: true,
       styleActiveLine: true,
+      value: this.activeDocument,
     });
     this.cm.setSize("100%", "400");
+    console.log(this.activeDocument, '--activeDocument--');
   },
+  methods: {
+    getFiles(path) {
+      // ask backend to read file
+      const payload = { path };
+      window.ipc.send("READ_FILE", payload);
+    }
+  }
 };
 </script>
 

@@ -158,3 +158,6 @@ ipcMain.on("READ_SUBFILE", (event, payload) => {
   // console.log("contentFiles", contentFiles);
   event.reply("READ_SUBFILE", { contentFiles, rootFileName });
 });
+
+// const activeDocument = fs.readFileSync('../../cmp-communication-assignment-problem/src/components/App.vue');
+// module.export(activeDocument);
