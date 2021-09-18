@@ -25,7 +25,7 @@ export default {
   mounted() {
     // handle reply from the backend for files
     window.ipc.on("READ_SUBFILE", (payload) => {
-      console.log("payload.contentFiles", payload.contentFiles);
+      // console.log("payload.contentFiles", payload.contentFiles);
       if (payload.rootFileName === this.path)
         this.allFiles.push(...payload.contentFiles);
     }),

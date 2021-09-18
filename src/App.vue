@@ -1,18 +1,20 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png" />
-  <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
+  
   <DirectoryContainer></DirectoryContainer>
   <div>
     <TheSimulatorContainer />
+    <TheComponentTreeContainer />
     <TheTerminalTextEditorContainer />
   </div>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
+
 import DirectoryContainer from "./components/directory/DirectoryContainer.vue";
 import TheSimulatorContainer from "./components/simulator/TheSimulatorContainer.vue";
 import TheTerminalTextEditorContainer from "./components/terminalTextEditor/TheTerminalTextEditorContainer.vue";
+import TheComponentTreeContainer from "./components/componentTree/TheComponentTreeContainer.vue";
 
 export default {
   name: "App",
@@ -22,7 +24,7 @@ export default {
     TheSimulatorContainer,
     TheTerminalTextEditorContainer,
     // TextEditorContainer,
-    // ComponentTreeContainer,
+    TheComponentTreeContainer,
     // TerminalContainer,
     // SimulatorContainer,
     // TabContainer

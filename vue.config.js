@@ -4,7 +4,7 @@ module.exports = {
     pluginOptions: {
       electronBuilder: {
         preload: 'public/preload.js',
-        nodeIntegration: true,
+        // nodeIntegration: true,
         externals:['node-pty'],
         // enableRemoteModule: false,
         // sandbox: true,
