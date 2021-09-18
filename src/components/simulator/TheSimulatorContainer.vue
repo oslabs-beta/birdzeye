@@ -1,21 +1,25 @@
 <template>
   <iframe id="sim" :src="projecturl"></iframe>
+  <form @click.prevent="choosePort" @keydown.enter.prevent="choosePort">
+    <input id="portChoice" placeholder="http://localhost:____/" v-model="portNumber">
+    <submit>Enter Port Number</submit>
+  </form>
 </template>
 
 <script>
-// const { ipcRenderer } = require('electron');
-// ipcRenderer.on = function('start-sim', (ev, ar) => {
-//   projecturl = ar[0];
-// })
+
 export default {
   data() {
     return {
       display: 0,
       projecturl: 'http://localhost:8081/',
+      portNumber: '',
     }
   },
   methods: {
-    
+    choosePort() {
+      this.projecturl = 'http://localhost:' + this.portNumber + '/';
+    }
   } 
 }
 </script>
@@ -26,5 +30,8 @@ export default {
     background-color: rgb(40, 209, 49);
     height: 30em;
     width: 40em;
+  }
+  submit {
+    background-color: white;
   }
 </style>
