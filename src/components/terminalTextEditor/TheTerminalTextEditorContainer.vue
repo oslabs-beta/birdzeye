@@ -5,6 +5,7 @@
 </template>
 
 <script>
+// Due to issues with terminal, temporarily commented out
 // import TheTerminal from './TheTerminal.vue';
 import TheTextEditor from './TheTextEditor.vue';
 

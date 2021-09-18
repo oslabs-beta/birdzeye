@@ -5,6 +5,7 @@ module.exports = {
       electronBuilder: {
         preload: 'public/preload.js',
         // nodeIntegration: true,
+        // nodeIntegration is causing issues, temporarily commented out
         externals:['node-pty'],
         // enableRemoteModule: false,
         // sandbox: true,
