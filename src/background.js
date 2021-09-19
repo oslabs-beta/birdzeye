@@ -164,33 +164,8 @@ ipcMain.on("READ_SUBFILE", (event, payload) => {
 
 //******* get CONTENTS of files **********
 ipcMain.on("READ_FILECONTENTS", (event, payload) => {
-  // console.log('hiiiiiiii');
-  // const contentFiles = [];
-  // const rootFileName = payload.path;
-  // console.log("payload.path: ", payload.path);
+  // encoding utf8 makes files contents a string
   let grabFiles = fs.readFileSync(payload.path, { encoding: 'utf8' });
-  // console.log("grabFiles", grabFiles);
-  //for (let fileObj of grabFiles) {
-    // console.log("fileObj", fileObj);
-    // let filePath = rootFileName + "/" + fileObj.name;
-    // console.log("filePath", filePath);
-    // if (fs.lstatSync(filePath).isFile()) {
-      // contentFiles.push(fileObj);
-      //console.log(fileObj, 'fileObj');
-    //}
-  //}
-  // console.log(grabFiles, 'grabFiles');
+  //send file contents to frontend
   event.reply("READ_FILECONTENTS", { grabFiles });
 });
-// const activeDocument = fs.readFileSync('../../cmp-communication-assignment-problem/src/components/App.vue');
-// module.export(activeDocument);
-
-// let activeDocument = fs.readFileSync('/App.vue', 'utf8', (err, data) => {
-//   if (err) {
-// console.error(err)
-// return
-// }
-// return data;
-// })
-
-// module.exports(activeDocument);
