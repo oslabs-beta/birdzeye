@@ -7,6 +7,7 @@ const validChannels = [
   "READ_SUBDIRECTORY",
   "WRITE_FILE",
   "READ_FILECONTENTS",
+  "OPEN_FILE_DIALOG",
 ];
 
 contextBridge.exposeInMainWorld("ipc", {

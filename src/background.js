@@ -1,6 +1,6 @@
 "use strict";
 
-import { app, protocol, BrowserWindow } from "electron";
+import { app, protocol, BrowserWindow, dialog } from "electron";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import installExtension, { VUEJS3_DEVTOOLS } from "electron-devtools-installer";
 const isDevelopment = process.env.NODE_ENV !== "production";
@@ -43,6 +43,7 @@ async function createWindow() {
     // Load the index.html when not in development
     win.loadURL("app://./index.html");
   }
+  
 }
 
 // Quit when all windows are closed.
@@ -75,6 +76,21 @@ app.on("ready", async () => {
     }
   }
   createWindow();
+  // ********Below opens open file dialog upon loading app, but is kind of annoying********
+  // const rootFolder = dialog.showOpenDialogSync({
+  //   title: "Open a Project",
+  //   buttonLabel: "Choose",
+  //   properties: [
+  //     'openDirectory',
+  //   ]
+  // })
+  // const rootDir = fs.readFileSync(rootFolder[0], { encoding: 'utf8' })
+  // console.log(rootDir, 'I am rootDir');
+  // if (!rootDir) {
+  //   return ;
+  // } else {
+  //   return rootDir;
+  // }
 });
 
 // Exit cleanly on request from parent process in development mode.
@@ -162,10 +178,27 @@ ipcMain.on("READ_SUBFILE", (event, payload) => {
 });
 
 
-//******* get CONTENTS of files **********
+//******* get CONTENTS of file to display in text editor **********
 ipcMain.on("READ_FILECONTENTS", (event, payload) => {
   // encoding utf8 makes files contents a string
   let grabFiles = fs.readFileSync(payload.path, { encoding: 'utf8' });
   //send file contents to frontend
   event.reply("READ_FILECONTENTS", { grabFiles });
+});
+
+//************** Open dialog box to select project directory ****************/
+ipcMain.on("OPEN_FILE_DIALOG", (event) => {
+  const dir = dialog.showOpenDialogSync({
+    title: "Open a Project",
+    buttonLabel: "Choose",
+    properties: [
+      'createDirectory',
+      'promptToCreate',
+      'openDirectory',
+    ]
+  })
+  // console.log(dir[0], "I am dir");
+  const rootDir = dir[0];
+  
+  event.reply("OPEN_FILE_DIALOG", { rootDir })
 });
