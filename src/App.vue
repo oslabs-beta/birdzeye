@@ -1,6 +1,6 @@
 <template>
 <div>
-  <TheOpeningPage v-if="displayOpen" @close-open-page="switchToMain" />
+  <TheOpeningPage v-if="displayOpen" @close-open-page="switchToMain" @save-root-dir="setRoot"/>
   <div v-else>
     <img alt="Birdzeye logo" src="./assets/birdzeye.png" height="200" width="300"/>
     <DirectoryContainer></DirectoryContainer>
@@ -25,6 +25,7 @@ export default {
   data() {
     return {
       displayOpen: true,
+      projectRoot: '',
     }
   },
   components: {
@@ -42,8 +43,14 @@ export default {
       window.ipc.send("READ_FILE", payload);
     },
     switchToMain(closed) {
+      //receive emit from opening page telling page to derender
       this.displayOpen = closed;
     },
+    setRoot(rootDir) {
+      //receive emit from opening page with root directory path
+      this.projectRoot = rootDir;
+      // console.log(this.projectRoot);
+    }
   },
 };
 </script>

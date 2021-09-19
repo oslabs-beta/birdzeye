@@ -188,6 +188,7 @@ ipcMain.on("READ_FILECONTENTS", (event, payload) => {
 
 //************** Open dialog box to select project directory ****************/
 ipcMain.on("OPEN_FILE_DIALOG", (event) => {
+  // Use Electron dialog box to get file path to serve as root
   const dir = dialog.showOpenDialogSync({
     title: "Open a Project",
     buttonLabel: "Choose",
@@ -197,8 +198,11 @@ ipcMain.on("OPEN_FILE_DIALOG", (event) => {
       'openDirectory',
     ]
   })
-  // console.log(dir[0], "I am dir");
-  const rootDir = dir[0];
-  
-  event.reply("OPEN_FILE_DIALOG", { rootDir })
+  // User can press cancel instead of choosing a directory, so dir could be an empty array
+  if (dir && dir[0]) {
+    const rootDir = dir[0];
+    event.reply("OPEN_FILE_DIALOG", { rootDir })
+  } else {
+    event.reply("OPEN_FILE_DIALOG", {})
+  }
 });

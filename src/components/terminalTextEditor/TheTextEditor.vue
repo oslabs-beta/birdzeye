@@ -19,7 +19,7 @@ export default {
   data() {
     return {
       activeDocument: 'welcome',
-      filePath: '../cmp-communication-assignment-problem/src/main.js'
+      filePath: '',
       //content: 'Welcome to Vuety',
     };
   },
@@ -32,7 +32,10 @@ export default {
         // run line below in this function in order to update activeDocument before editor renders to screen
         this.cm.getDoc().setValue(this.activeDocument);
       })
-    this.getFile(this.filePath)
+    if (this.filePath) {
+      this.getFile(this.filePath)
+    }
+    
     this.cm = Codemirror.fromTextArea(this.$refs.editor, {
       lineNumbers: true,
       theme: "dracula",
