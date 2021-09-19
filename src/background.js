@@ -118,6 +118,7 @@ ipcMain.on("READ_FILE", (event, payload) => {
   for (let fileObj of grabFiles) {
     if (fs.lstatSync(fileObj.name).isFile()) {
       contentFiles.push(fileObj.name);
+      // console.log(fileObj, 'fileObj');
     }
   }
   event.reply("READ_FILE", { contentFiles });
@@ -126,16 +127,16 @@ ipcMain.on("READ_FILE", (event, payload) => {
 ipcMain.on("READ_SUBDIRECTORY", (event, payload) => {
   const contentFiles = [];
   const rootDirectoryName = payload.path;
-  console.log("payload.path: ", payload.path);
+  // console.log("payload.path: ", payload.path);
   let grabFiles = fs.readdirSync(rootDirectoryName, { withFileTypes: true });
-  console.log("grabFiles", grabFiles);
+  // console.log("grabFiles", grabFiles);
   for (let fileObj of grabFiles) {
-    console.log("fileObj", fileObj);
+    // console.log("fileObj", fileObj);
     let filePath = rootDirectoryName + "/" + fileObj.name;
-    console.log("filePath", filePath);
+    // console.log("filePath", filePath);
     if (fs.lstatSync(filePath).isDirectory()) {
       contentFiles.push(fileObj.name);
-      console.log("contentFiles", contentFiles);
+      // console.log("contentFiles", contentFiles);
     }
   }
   event.reply("READ_SUBDIRECTORY", { contentFiles, rootDirectoryName });
@@ -153,11 +154,42 @@ ipcMain.on("READ_SUBFILE", (event, payload) => {
     // console.log("filePath", filePath);
     if (fs.lstatSync(filePath).isFile()) {
       contentFiles.push(fileObj.name);
+      // console.log(fileObj, 'fileObj');
     }
   }
   // console.log("contentFiles", contentFiles);
   event.reply("READ_SUBFILE", { contentFiles, rootFileName });
 });
 
+
+//******* get CONTENTS of files **********
+ipcMain.on("READ_FILECONTENTS", (event, payload) => {
+  // const contentFiles = [];
+  // const rootFileName = payload.path;
+  // console.log("payload.path: ", payload.path);
+  let grabFiles = fs.readFileSync(payload.path, { flag: String });
+  // console.log("grabFiles", grabFiles);
+  //for (let fileObj of grabFiles) {
+    // console.log("fileObj", fileObj);
+    // let filePath = rootFileName + "/" + fileObj.name;
+    // console.log("filePath", filePath);
+    // if (fs.lstatSync(filePath).isFile()) {
+      // contentFiles.push(fileObj);
+      //console.log(fileObj, 'fileObj');
+    //}
+  //}
+  console.log(grabFiles, 'grabFiles');
+  event.reply("READ_FILECONTENTS", { grabFiles });
+});
 // const activeDocument = fs.readFileSync('../../cmp-communication-assignment-problem/src/components/App.vue');
 // module.export(activeDocument);
+
+// let activeDocument = fs.readFileSync('/App.vue', 'utf8', (err, data) => {
+//   if (err) {
+// console.error(err)
+// return
+// }
+// return data;
+// })
+
+// module.exports(activeDocument);

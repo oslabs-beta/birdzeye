@@ -13,7 +13,7 @@ export default {
   data() {
     return {
       display: 0,
-      projecturl: 'http://localhost:8081/',
+      projecturl: '',
       portNumber: '',
     }
   },
