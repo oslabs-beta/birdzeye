@@ -161,7 +161,6 @@ ipcMain.on("READ_SUBFILE", (event, payload) => {
   event.reply("READ_SUBFILE", { contentFiles, rootFileName });
 });
 
-
 //******* get CONTENTS of files **********
 ipcMain.on("READ_FILECONTENTS", (event, payload) => {
   // encoding utf8 makes files contents a string
@@ -169,3 +168,9 @@ ipcMain.on("READ_FILECONTENTS", (event, payload) => {
   //send file contents to frontend
   event.reply("READ_FILECONTENTS", { grabFiles });
 });
+
+ipcMain.on("WRITE_FILE", (event, [payload, content]) => {
+  fs.writeFileSync(payload, content);
+  // send response to frontend
+  event.reply("WRITE_FILE", 'Saved!');
+})
