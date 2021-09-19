@@ -164,10 +164,11 @@ ipcMain.on("READ_SUBFILE", (event, payload) => {
 
 //******* get CONTENTS of files **********
 ipcMain.on("READ_FILECONTENTS", (event, payload) => {
+  // console.log('hiiiiiiii');
   // const contentFiles = [];
   // const rootFileName = payload.path;
   // console.log("payload.path: ", payload.path);
-  let grabFiles = fs.readFileSync(payload.path, { flag: String });
+  let grabFiles = fs.readFileSync(payload.path, { encoding: 'utf8' });
   // console.log("grabFiles", grabFiles);
   //for (let fileObj of grabFiles) {
     // console.log("fileObj", fileObj);
@@ -178,7 +179,7 @@ ipcMain.on("READ_FILECONTENTS", (event, payload) => {
       //console.log(fileObj, 'fileObj');
     //}
   //}
-  console.log(grabFiles, 'grabFiles');
+  // console.log(grabFiles, 'grabFiles');
   event.reply("READ_FILECONTENTS", { grabFiles });
 });
 // const activeDocument = fs.readFileSync('../../cmp-communication-assignment-problem/src/components/App.vue');
