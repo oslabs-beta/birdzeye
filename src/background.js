@@ -165,7 +165,12 @@ ipcMain.on("READ_SUBFILE", (event, payload) => {
 ipcMain.on("READ_FILECONTENTS", (event, payload) => {
   // encoding utf8 makes files contents a string
   let grabFiles = fs.readFileSync(payload.path, { encoding: 'utf8' });
-
   //send file contents to frontend
   event.reply("READ_FILECONTENTS", { grabFiles });
 });
+
+ipcMain.on("WRITE_FILE", (event, [payload, content]) => {
+  fs.writeFileSync(payload, content);
+  // send response to frontend
+  event.reply("WRITE_FILE", 'Saved!');
+})
