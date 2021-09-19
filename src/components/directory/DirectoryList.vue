@@ -28,7 +28,7 @@ export default {
     }),
       window.ipc.on("READ_FILE", (payload) => {
         this.allFiles = payload.contentFiles;
-        console.log("this.allFiles :", this.allFiles);
+        // console.log("this.allFiles :", this.allFiles);
       });
 
     this.getDirectories("./");

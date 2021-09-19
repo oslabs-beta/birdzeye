@@ -9,10 +9,11 @@
 <script>
 
 export default {
+  // iframe above displays port defined by user if project is running on server
   data() {
     return {
       display: 0,
-      projecturl: 'http://localhost:8081/',
+      projecturl: '',
       portNumber: '',
     }
   },

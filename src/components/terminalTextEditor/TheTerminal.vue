@@ -3,6 +3,7 @@
 </template>
 
 <script>
+// Use XTerm to create terminal. Ptyprocess makes it interact with OS.
       import { Terminal } from 'xterm';
       const ipc = require('electron').ipcRenderer;
       const os = require('os');
@@ -43,6 +44,7 @@
 </script>
 
 <style>
+/* terminal styling, taken from XTerm files */
 .xterm {
     position: relative;
     user-select: none;

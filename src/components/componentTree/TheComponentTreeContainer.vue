@@ -18,7 +18,7 @@ export default {
   mounted() {
     
     const setComponentName = (cmp) => {
-      console.log(cmp.name, '....cmp.name ...')
+      // console.log(cmp.name, '....cmp.name ...')
       if (cmp.components) {
         this.componentNameList.push(...Object.keys(cmp.components));
         for (const [cmpName, cmpDetails] of Object.entries(cmp.components)) {
@@ -41,7 +41,7 @@ export default {
       }
     };
     setComponentName(App);
-    console.log(this.componentList, 'componentlist    ')
+    // console.log(this.componentList, 'componentlist    ')
   },
   data() {
     return {
