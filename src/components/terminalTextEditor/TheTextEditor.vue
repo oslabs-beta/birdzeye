@@ -17,18 +17,12 @@ import "codemirror/mode/sass/sass.js";
 import "codemirror/mode/vue/vue.js";
 import "codemirror/mode/xml/xml.js";
 import "codemirror/addon/edit/closebrackets.js";
-// import 'codemirror/addon/hint/show-hint.js';
-// import 'codemirror/addon/hint/show-hint.css';
-// import "codemirror/addon/hint/javascript-hint.js";
 
 export default {
   data() {
     return {
       activeDocument: '',
       filePath: './src/App.vue',
-      // filePath: './src/background.js',
-      // filePath: './README.md',
-      // filePath: './public/index.html',
       textEditorSave: this.handleSave.bind(this),
     };
   },
@@ -45,9 +39,7 @@ export default {
       lineNumbers: true,
       theme: "dracula",
       mode: "vue",
-      // showHint: true,
       lineWrapping: true,
-      styleActiveLine: true,
       autoCloseBrackets: true,  
       value: this.activeDocument,
       extraKeys: {
@@ -107,6 +99,9 @@ export default {
 </script>
 
 <style scoped>
+button {
+  float: right;
+}
 section {
   text-align: left;
 }
