@@ -15,21 +15,8 @@ export default {
   },
   data() {
     return {
-      name: this.fileName,
-      path: this.parentPath,
-      selectedPath: '',
+      componentTreeFileName: this.fileName,
     };
-  },
-
-  methods: {
-    handleSelectPath() {
-      this.selectedPath = this.path;
-    },
-  },
-  updated() {
-    console.log(this.fileName, '.......  fileName  .........')
-    console.log(this.selectedPath, '.......  selectedPath  .........')
-    console.log(this.path, '.......  path  .........')
   },
 };
 </script>
