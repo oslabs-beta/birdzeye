@@ -14,7 +14,9 @@ export default {
     // RightClickForm,
   },
   data() {
-    return {};
+    return {
+      componentTreeFileName: this.fileName,
+    };
   },
 };
 </script>

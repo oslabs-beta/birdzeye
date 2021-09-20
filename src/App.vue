@@ -1,32 +1,42 @@
 <template>
-<div>
-  <TheOpeningPage v-if="displayOpen" @close-open-page="switchToMain" @save-root-dir="setRoot"/>
-  <div v-else>
-    <img alt="Birdzeye logo" src="./assets/birdzeye.png" height="200" width="300"/>
-    <DirectoryContainer :rootdir="projectRoot"></DirectoryContainer>
-    <TheSimulatorContainer />
-    <TheComponentTreeContainer />
-    <TheTerminalTextEditorContainer />
-  </div>
+  <div>
+    <TheOpeningPage
+      v-if="displayOpen"
+      @close-open-page="switchToMain"
+      @save-root-dir="setRoot"
+    />
+    <div v-else>
+      <img
+        alt="Birdzeye logo"
+        src="./assets/birdzeye.png"
+        height="200"
+        width="300"
+      />
+      <TerminalV2Container></TerminalV2Container>
+      <DirectoryContainer :rootdir="projectRoot"></DirectoryContainer>
+      <TheSimulatorContainer />
+      <TheComponentTreeContainer />
+      <TheTerminalTextEditorContainer />
+    </div>
   </div>
 </template>
 
 <script>
-
 import DirectoryContainer from "./components/directory/DirectoryContainer.vue";
 import TheSimulatorContainer from "./components/simulator/TheSimulatorContainer.vue";
 import TheTerminalTextEditorContainer from "./components/terminalTextEditor/TheTerminalTextEditorContainer.vue";
 import TheComponentTreeContainer from "./components/componentTree/TheComponentTreeContainer.vue";
+import TerminalV2Container from "./components/TerminalV2/TerminalV2Container.vue";
 import TheOpeningPage from "./components/TheOpeningPage.vue";
 
 export default {
   name: "App",
-  
+
   data() {
     return {
       displayOpen: true,
-      projectRoot: 'root',
-    }
+      projectRoot: "root",
+    };
   },
   // provide() {
   //   //Send path to root file of project to DirectoryList
@@ -39,6 +49,9 @@ export default {
     TheSimulatorContainer,
     TheTerminalTextEditorContainer,
     TheComponentTreeContainer,
+    TerminalV2Container,
+    // TerminalContainer,
+    // SimulatorContainer,
     TheOpeningPage,
     // TabContainer
   },
@@ -55,8 +68,8 @@ export default {
     setRoot(rootDir) {
       //receive emit from opening page with root directory path
       this.projectRoot = rootDir;
-      console.log(this.projectRoot, 'this.projectRoot in App.vue');
-    }
+      console.log(this.projectRoot, "this.projectRoot in App.vue");
+    },
   },
 };
 </script>
@@ -69,7 +82,6 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
-  background: 'yellow';
-
+  background: "yellow";
 }
 </style>
