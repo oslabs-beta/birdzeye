@@ -206,3 +206,9 @@ ipcMain.on("OPEN_FILE_DIALOG", (event) => {
     event.reply("OPEN_FILE_DIALOG", {})
   }
 });
+
+ipcMain.on("WRITE_FILE", (event, [payload, content]) => {
+  fs.writeFileSync(payload, content);
+  // send response to frontend
+  event.reply("WRITE_FILE", 'Saved!');
+})
