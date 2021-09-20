@@ -28,12 +28,14 @@ export default {
   },
   mounted() {
     window.ipc.on("READ_FILECONTENTS", (payload) => {
-      this.activeDocument = payload.grabFiles;
-      // run line below in this function in order to update activeDocument before editor renders to screen
-      this.cm.getDoc().setValue(this.activeDocument);
-    })
-    this.getFile(this.filePath)
-    
+        // console.log(payload.grabFiles, 'This is the payload.grabFiles on the front end')
+        this.activeDocument = payload.grabFiles;
+        // run line below in this function in order to update activeDocument before editor renders to screen
+        this.cm.getDoc().setValue(this.activeDocument);
+      })
+    if (this.filePath) {
+      this.getFile(this.filePath)
+    }
     
     this.cm = Codemirror.fromTextArea(this.$refs.editor, {
       lineNumbers: true,
