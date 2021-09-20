@@ -5,6 +5,7 @@
   <div>
     <TheSimulatorContainer />
     <TheComponentTreeContainer />
+    <TheTabContainer />
     <TheTerminalTextEditorContainer />
   </div>
 </template>
@@ -13,8 +14,9 @@
 
 import DirectoryContainer from "./components/directory/DirectoryContainer.vue";
 import TheSimulatorContainer from "./components/simulator/TheSimulatorContainer.vue";
-import TheTerminalTextEditorContainer from "./components/terminalTextEditor/TheTerminalTextEditorContainer.vue";
 import TheComponentTreeContainer from "./components/componentTree/TheComponentTreeContainer.vue";
+import TheTabContainer from './components/tab/TheTabContainer.vue';
+import TheTerminalTextEditorContainer from "./components/terminalTextEditor/TheTerminalTextEditorContainer.vue";
 
 export default {
   name: "App",
@@ -22,6 +24,7 @@ export default {
   components: {
     DirectoryContainer,
     TheSimulatorContainer,
+    TheTabContainer,
     TheTerminalTextEditorContainer,
     // TextEditorContainer,
     TheComponentTreeContainer,

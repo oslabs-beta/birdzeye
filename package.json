@@ -18,6 +18,7 @@
     "core-js": "^3.6.5",
     "node-pty": "^0.10.1",
     "vue": "^3.0.0",
+    "vuex": "^4.0.2",
     "xterm": "^4.13.0"
   },
   "devDependencies": {
