@@ -20,7 +20,9 @@ import Directory from "./Directory.vue";
 import File from "./File.vue";
 
 export default {
+  props: ['rootdir'],
   mounted() {
+    console.log(this.rootdir, 'this.rootdir in DirectoryList mounted');
     // handle reply from the backend
     window.ipc.on("READ_DIRECTORY", (payload) => {
       this.allDirectories = payload.contentFiles;
@@ -30,11 +32,17 @@ export default {
         this.allFiles = payload.contentFiles;
         // console.log("this.allFiles :", this.allFiles);
       });
-
-    this.getDirectories("./");
+    console.log(this.directory, 'this.directory in DirectoryList');
+    this.getDirectories('./');
     // console.log("this.allDirectories :", typeof this.allDirectories);
-    this.getFiles("./");
+    this.getFiles('./');
   },
+  // updated() {
+  //   console.log(this.directory, "this.directory in DirectoryList");
+  //   console.log(this.rootdir, 'this.rootdir in DirectoryList');
+  //   this.getDirectories(this.directory);
+  //   this.getFiles(this.directory);
+  // },
   components: {
     Directory,
     File,
@@ -43,7 +51,7 @@ export default {
     return {
       allDirectories: [],
       allFiles: [],
-      // directory: "",
+      directory: this.rootdir + '/',
     };
   },
   methods: {

@@ -3,7 +3,7 @@
   <TheOpeningPage v-if="displayOpen" @close-open-page="switchToMain" @save-root-dir="setRoot"/>
   <div v-else>
     <img alt="Birdzeye logo" src="./assets/birdzeye.png" height="200" width="300"/>
-    <DirectoryContainer></DirectoryContainer>
+    <DirectoryContainer :rootdir="projectRoot"></DirectoryContainer>
     <TheSimulatorContainer />
     <TheComponentTreeContainer />
     <TheTerminalTextEditorContainer />
@@ -25,9 +25,15 @@ export default {
   data() {
     return {
       displayOpen: true,
-      projectRoot: '',
+      projectRoot: 'root',
     }
   },
+  // provide() {
+  //   //Send path to root file of project to DirectoryList
+  //   return {
+  //   rootdir: this.projectRoot
+  // }
+  // },
   components: {
     DirectoryContainer,
     TheSimulatorContainer,
@@ -49,7 +55,7 @@ export default {
     setRoot(rootDir) {
       //receive emit from opening page with root directory path
       this.projectRoot = rootDir;
-      // console.log(this.projectRoot);
+      console.log(this.projectRoot, 'this.projectRoot in App.vue');
     }
   },
 };
