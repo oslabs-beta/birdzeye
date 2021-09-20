@@ -1,5 +1,8 @@
 <template>
-  <div>{{ configKeys }} : {{ configValue }}</div>
+  <div>
+    <button>{{ configKeys }}</button> :
+    <button>{{ configValue }}</button>
+  </div>
 </template>
 
 <script>

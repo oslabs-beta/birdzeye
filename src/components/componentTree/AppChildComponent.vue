@@ -1,12 +1,12 @@
 <template>
   <div>
-    <button>{{ componentName }} || {{ componentInfoKeys }}</button>
-    <div>
+    <button @click="toggleComponentInfo">{{ componentName }}</button>
+    <div v-show="showInfo === true">
       <component-info
         v-for="config in componentInfoKeys"
         :key="config + componentName"
         :config-keys="config"
-        :config-values="componentInfo[config]"
+        :config-value="componentInfo[config]"
       ></component-info>
     </div>
     <div v-if="hasChildComponents === true">
@@ -37,8 +37,10 @@ export default {
       childComponentsObj: {},
       childComponentNameList: [],
       hasChildComponents: false,
-      componentInfoKeys: Object.keys(this.componentInfo).sort(),
-      componentInfoValues: Object.values(this.componentInfo).sort(),
+      showInfo: false,
+      componentInfoKeys: Object.keys(this.componentInfo)
+        .sort()
+        .filter((e) => e !== "components"),
     };
   },
   methods: {
@@ -48,11 +50,13 @@ export default {
         this.hasChildComponents = true;
         //store the info about all the parents children
         this.childComponentsObj = parentComponent.components;
-        console.log(this.childComponentsObj);
+
         //store the names of each child in an array
         this.childComponentNameList = Object.keys(parentComponent.components);
-        console.log(this.childComponentNameList);
       }
+    },
+    toggleComponentInfo() {
+      this.showInfo = !this.showInfo;
     },
   },
 };
