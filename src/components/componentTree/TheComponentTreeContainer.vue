@@ -1,57 +1,45 @@
 <template>
-  <component-tree
-     v-for="cmp in componentList"
-     :key="cmp"
-     :cmp-name="componentList.cmp"
-     :cmp="cmp"
-  ></component-tree>
+  <div>
+    <button>App</button>
+    <app-child-component
+      v-for="component in childComponentNameList"
+      :key="component"
+      :component-name="component"
+      :component-info="childComponentsObj[component]"
+    >
+    </app-child-component>
+  </div>
 </template>
 
 <script>
-import App from '../../App.vue';
-import ComponentTree from './ComponentTree.vue';
+import App from "../../App.vue";
+import AppChildComponent from "./AppChildComponent.vue";
 
 export default {
-  components: {
-    ComponentTree
-  },
   mounted() {
-    
-    const setComponentName = (cmp) => {
-      console.log(cmp.name, '....cmp.name ...')
-      if (cmp.components) {
-        this.componentNameList.push(...Object.keys(cmp.components));
-        for (const [cmpName, cmpDetails] of Object.entries(cmp.components)) {
-          // console.log(cmpName, '......    key   ........')
-          // console.log(cmpDetails, '......    val   ........')
-          // // cmpDetails.parentCmpName = cmp.name || cmpName;
-          // console.log(Object.keys(cmpDetails.components).length, '......        Objt .........')
-          if (cmpDetails.components) {
-            if (Object.keys(cmpDetails.components).length > 0) {
-              cmpDetails.parentCmpName = cmpName;
-            }
-          }
-
-          this.componentList[cmpName] = cmpDetails
-          // const cmpProps = cmpDetails.props;
-          // const cmpChild = [...Object.keys(cmpDetails.components)];
-          // this.componentList[cmpName] = {'Props': cmpProps, 'Child-Components': cmpChild};
-          setComponentName(cmpDetails);
-        }
-      }
-    };
-    setComponentName(App);
-    console.log(this.componentList, 'componentlist    ')
+    this.getChildrenComponents(App);
+  },
+  components: {
+    AppChildComponent,
   },
   data() {
     return {
-      componentList: {},
-      componentNameList: [],
-    }
-  }
-}
+      childComponentsObj: {},
+      childComponentNameList: [],
+    };
+  },
+  methods: {
+    getChildrenComponents(parentComponent) {
+      //if the parent has children, in this case app
+      if (parentComponent.components) {
+        //store the info about all the parent's children in an object
+        this.childComponentsObj = parentComponent.components;
+        //store the names of each child in an array
+        this.childComponentNameList = Object.keys(parentComponent.components);
+      }
+    },
+  },
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

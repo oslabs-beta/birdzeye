@@ -1,6 +1,6 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png" />
-  
+
   <DirectoryContainer></DirectoryContainer>
   <div>
     <TheSimulatorContainer />
@@ -10,7 +10,6 @@
 </template>
 
 <script>
-
 import DirectoryContainer from "./components/directory/DirectoryContainer.vue";
 import TheSimulatorContainer from "./components/simulator/TheSimulatorContainer.vue";
 import TheTerminalTextEditorContainer from "./components/terminalTextEditor/TheTerminalTextEditorContainer.vue";
@@ -18,7 +17,7 @@ import TheComponentTreeContainer from "./components/componentTree/TheComponentTr
 
 export default {
   name: "App",
-
+  //
   components: {
     DirectoryContainer,
     TheSimulatorContainer,
