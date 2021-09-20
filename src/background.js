@@ -141,6 +141,7 @@ ipcMain.on("READ_FILE", (event, payload) => {
   console.log(grabFiles, 'grabFiles READ_FILE');
   for (let fileObj of grabFiles) {
     if (fileObj.name[0] !== '.') {
+      //add the parent path to the name of the file so that lstat can find the file
       const filePath = payload.path + fileObj.name;
       if (fs.lstatSync(filePath).isFile()) {
         contentFiles.push(fileObj.name);

@@ -33,16 +33,12 @@ export default {
         // console.log("this.allFiles :", this.allFiles);
       });
     console.log(this.directory, 'this.directory in DirectoryList');
+    //this.directory is the file path passed from the pop up on the opening page
     this.getDirectories(this.directory);
     // console.log("this.allDirectories :", typeof this.allDirectories);
     this.getFiles(this.directory);
   },
-  // updated() {
-  //   console.log(this.directory, "this.directory in DirectoryList");
-  //   console.log(this.rootdir, 'this.rootdir in DirectoryList');
-  //   this.getDirectories(this.directory);
-  //   this.getFiles(this.directory);
-  // },
+  
   components: {
     Directory,
     File,
