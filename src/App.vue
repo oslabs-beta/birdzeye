@@ -1,6 +1,6 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png" />
-
+  <TerminalV2Container></TerminalV2Container>
   <DirectoryContainer></DirectoryContainer>
   <div>
     <TheSimulatorContainer />
@@ -14,6 +14,7 @@ import DirectoryContainer from "./components/directory/DirectoryContainer.vue";
 import TheSimulatorContainer from "./components/simulator/TheSimulatorContainer.vue";
 import TheTerminalTextEditorContainer from "./components/terminalTextEditor/TheTerminalTextEditorContainer.vue";
 import TheComponentTreeContainer from "./components/componentTree/TheComponentTreeContainer.vue";
+import TerminalV2Container from "./components/TerminalV2/TerminalV2Container.vue";
 
 export default {
   name: "App",
@@ -24,6 +25,7 @@ export default {
     TheTerminalTextEditorContainer,
     // TextEditorContainer,
     TheComponentTreeContainer,
+    TerminalV2Container,
     // TerminalContainer,
     // SimulatorContainer,
     // TabContainer

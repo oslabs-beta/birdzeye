@@ -8,6 +8,7 @@ const isDevelopment = process.env.NODE_ENV !== "production";
 const path = require("path");
 const { ipcMain } = require("electron");
 const fs = require("fs");
+const { exec } = require("child_process");
 
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
@@ -30,7 +31,6 @@ async function createWindow() {
       enableRemoteModule: true,
       sandbox: true,
       // // __static is set by webpack and will point to the public directory
-      
     },
   });
 
@@ -126,16 +126,11 @@ ipcMain.on("READ_FILE", (event, payload) => {
 ipcMain.on("READ_SUBDIRECTORY", (event, payload) => {
   const contentFiles = [];
   const rootDirectoryName = payload.path;
-  console.log("payload.path: ", payload.path);
   let grabFiles = fs.readdirSync(rootDirectoryName, { withFileTypes: true });
-  console.log("grabFiles", grabFiles);
   for (let fileObj of grabFiles) {
-    console.log("fileObj", fileObj);
     let filePath = rootDirectoryName + "/" + fileObj.name;
-    console.log("filePath", filePath);
     if (fs.lstatSync(filePath).isDirectory()) {
       contentFiles.push(fileObj.name);
-      console.log("contentFiles", contentFiles);
     }
   }
   event.reply("READ_SUBDIRECTORY", { contentFiles, rootDirectoryName });
@@ -144,17 +139,30 @@ ipcMain.on("READ_SUBDIRECTORY", (event, payload) => {
 ipcMain.on("READ_SUBFILE", (event, payload) => {
   const contentFiles = [];
   const rootFileName = payload.path;
-  // console.log("payload.path: ", payload.path);
   let grabFiles = fs.readdirSync(rootFileName, { withFileTypes: true });
-  // console.log("grabFiles", grabFiles);
   for (let fileObj of grabFiles) {
-    // console.log("fileObj", fileObj);
     let filePath = rootFileName + "/" + fileObj.name;
-    // console.log("filePath", filePath);
     if (fs.lstatSync(filePath).isFile()) {
       contentFiles.push(fileObj.name);
     }
   }
-  // console.log("contentFiles", contentFiles);
+
   event.reply("READ_SUBFILE", { contentFiles, rootFileName });
+});
+
+ipcMain.on("RUN_COMMAND", (event, payload) => {
+  let commandResponse;
+  exec(payload.command, (error, stdout, stderr) => {
+    if (error) {
+      console.log(`error: ${error.message}`);
+      return;
+    }
+    if (stderr) {
+      console.log(`stderr: ${stderr}`);
+      return;
+    }
+    console.log(`stdout: ${stdout}`);
+    commandResponse = stdout;
+    event.reply("RUN_COMMAND", { commandResponse });
+  });
 });
