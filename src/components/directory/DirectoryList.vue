@@ -33,9 +33,9 @@ export default {
         // console.log("this.allFiles :", this.allFiles);
       });
     console.log(this.directory, 'this.directory in DirectoryList');
-    this.getDirectories('./');
+    this.getDirectories(this.directory);
     // console.log("this.allDirectories :", typeof this.allDirectories);
-    this.getFiles('./');
+    this.getFiles(this.directory);
   },
   // updated() {
   //   console.log(this.directory, "this.directory in DirectoryList");

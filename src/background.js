@@ -119,25 +119,37 @@ if (isDevelopment) {
 
 ipcMain.on("READ_DIRECTORY", (event, payload) => {
   const contentFiles = [];
-  let grabFiles = fs.readdirSync(payload.path, { withFileTypes: true });
+  let grabFiles = fs.readdirSync(path.resolve('/', payload.path), { withFileTypes: true });
+  console.log(grabFiles, 'grabFiles READ_DIRECTORY');
   for (let fileObj of grabFiles) {
-    if (fs.lstatSync(fileObj.name).isDirectory()) {
-      contentFiles.push(fileObj.name);
+    if (fileObj.name[0] === '.') {
+      continue;
+    } else {
+      const filePath = payload.path + fileObj.name;
+      if (fs.lstatSync(filePath).isDirectory()) {
+        contentFiles.push(fileObj.name);
+      }
     }
-  }
-  event.reply("READ_DIRECTORY", { contentFiles });
+    event.reply("READ_DIRECTORY", { contentFiles });
+    }
+    
 });
 
 ipcMain.on("READ_FILE", (event, payload) => {
   const contentFiles = [];
-  let grabFiles = fs.readdirSync(payload.path, { withFileTypes: true });
+  let grabFiles = fs.readdirSync(path.resolve('/', payload.path), { withFileTypes: true });
+  console.log(grabFiles, 'grabFiles READ_FILE');
   for (let fileObj of grabFiles) {
-    if (fs.lstatSync(fileObj.name).isFile()) {
-      contentFiles.push(fileObj.name);
-      // console.log(fileObj, 'fileObj');
+    if (fileObj.name[0] !== '.') {
+      const filePath = payload.path + fileObj.name;
+      if (fs.lstatSync(filePath).isFile()) {
+        contentFiles.push(fileObj.name);
+        // console.log(fileObj, 'fileObj');
+      }
     }
-  }
-  event.reply("READ_FILE", { contentFiles });
+    event.reply("READ_FILE", { contentFiles });
+    }
+    
 });
 
 ipcMain.on("READ_SUBDIRECTORY", (event, payload) => {
