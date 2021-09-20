@@ -1,7 +1,7 @@
 <template>
   <div>
     <button @click="executeShellCommand(command)">Execute Command</button>
-    <textarea></textarea>
+
     /////////////////////////////////////////
     <div>{{ commandResponseDisplay }}</div>
     /////////////////////////////////////////

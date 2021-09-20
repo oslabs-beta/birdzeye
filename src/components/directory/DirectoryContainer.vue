@@ -1,6 +1,6 @@
 <template>
   <div>
-    <DirectoryList>Directory List</DirectoryList>
+    <DirectoryList :rootdir="rootdir">Directory List</DirectoryList>
   </div>
 </template>
 
@@ -8,6 +8,10 @@
 import DirectoryList from "./DirectoryList.vue";
 
 export default {
+  mounted() {
+console.log(this.rootdir, 'this.rootdir in DirectoryContainer');
+  },
+  props: ['rootdir'],
   components: {
     DirectoryList,
   },

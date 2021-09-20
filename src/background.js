@@ -1,6 +1,6 @@
 "use strict";
 
-import { app, protocol, BrowserWindow } from "electron";
+import { app, protocol, BrowserWindow, dialog } from "electron";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import installExtension, { VUEJS3_DEVTOOLS } from "electron-devtools-installer";
 const isDevelopment = process.env.NODE_ENV !== "production";
@@ -75,6 +75,21 @@ app.on("ready", async () => {
     }
   }
   createWindow();
+  // ********Below opens open file dialog upon loading app, but is kind of annoying********
+  // const rootFolder = dialog.showOpenDialogSync({
+  //   title: "Open a Project",
+  //   buttonLabel: "Choose",
+  //   properties: [
+  //     'openDirectory',
+  //   ]
+  // })
+  // const rootDir = fs.readFileSync(rootFolder[0], { encoding: 'utf8' })
+  // console.log(rootDir, 'I am rootDir');
+  // if (!rootDir) {
+  //   return ;
+  // } else {
+  //   return rootDir;
+  // }
 });
 
 // Exit cleanly on request from parent process in development mode.
@@ -103,34 +118,55 @@ if (isDevelopment) {
 
 ipcMain.on("READ_DIRECTORY", (event, payload) => {
   const contentFiles = [];
-  let grabFiles = fs.readdirSync(payload.path, { withFileTypes: true });
+  let grabFiles = fs.readdirSync(path.resolve("/", payload.path), {
+    withFileTypes: true,
+  });
+  console.log(grabFiles, "grabFiles READ_DIRECTORY");
   for (let fileObj of grabFiles) {
-    if (fs.lstatSync(fileObj.name).isDirectory()) {
-      contentFiles.push(fileObj.name);
+    if (fileObj.name[0] === ".") {
+      continue;
+    } else {
+      const filePath = payload.path + fileObj.name;
+      if (fs.lstatSync(filePath).isDirectory()) {
+        contentFiles.push(fileObj.name);
+      }
     }
+    event.reply("READ_DIRECTORY", { contentFiles });
   }
-  event.reply("READ_DIRECTORY", { contentFiles });
 });
 
 ipcMain.on("READ_FILE", (event, payload) => {
   const contentFiles = [];
-  let grabFiles = fs.readdirSync(payload.path, { withFileTypes: true });
+  let grabFiles = fs.readdirSync(path.resolve("/", payload.path), {
+    withFileTypes: true,
+  });
+  console.log(grabFiles, "grabFiles READ_FILE");
   for (let fileObj of grabFiles) {
-    if (fs.lstatSync(fileObj.name).isFile()) {
-      contentFiles.push(fileObj.name);
+    if (fileObj.name[0] !== ".") {
+      //add the parent path to the name of the file so that lstat can find the file
+      const filePath = payload.path + fileObj.name;
+      if (fs.lstatSync(filePath).isFile()) {
+        contentFiles.push(fileObj.name);
+        // console.log(fileObj, 'fileObj');
+      }
     }
+    event.reply("READ_FILE", { contentFiles });
   }
-  event.reply("READ_FILE", { contentFiles });
 });
 
 ipcMain.on("READ_SUBDIRECTORY", (event, payload) => {
   const contentFiles = [];
   const rootDirectoryName = payload.path;
+  // console.log("payload.path: ", payload.path);
   let grabFiles = fs.readdirSync(rootDirectoryName, { withFileTypes: true });
+  // console.log("grabFiles", grabFiles);
   for (let fileObj of grabFiles) {
+    // console.log("fileObj", fileObj);
     let filePath = rootDirectoryName + "/" + fileObj.name;
+    // console.log("filePath", filePath);
     if (fs.lstatSync(filePath).isDirectory()) {
       contentFiles.push(fileObj.name);
+      // console.log("contentFiles", contentFiles);
     }
   }
   event.reply("READ_SUBDIRECTORY", { contentFiles, rootDirectoryName });
@@ -144,6 +180,7 @@ ipcMain.on("READ_SUBFILE", (event, payload) => {
     let filePath = rootFileName + "/" + fileObj.name;
     if (fs.lstatSync(filePath).isFile()) {
       contentFiles.push(fileObj.name);
+      // console.log(fileObj, 'fileObj');
     }
   }
 
@@ -165,4 +202,35 @@ ipcMain.on("RUN_COMMAND", (event, payload) => {
     commandResponse = stdout;
     event.reply("RUN_COMMAND", { commandResponse });
   });
+});
+
+//******* get CONTENTS of file to display in text editor **********
+ipcMain.on("READ_FILECONTENTS", (event, payload) => {
+  // encoding utf8 makes files contents a string
+  let grabFiles = fs.readFileSync(payload.path, { encoding: "utf8" });
+  //send file contents to frontend
+  event.reply("READ_FILECONTENTS", { grabFiles });
+});
+
+//************** Open dialog box to select project directory ****************/
+ipcMain.on("OPEN_FILE_DIALOG", (event) => {
+  // Use Electron dialog box to get file path to serve as root
+  const dir = dialog.showOpenDialogSync({
+    title: "Open a Project",
+    buttonLabel: "Choose",
+    properties: ["createDirectory", "promptToCreate", "openDirectory"],
+  });
+  // User can press cancel instead of choosing a directory, so dir could be an empty array
+  if (dir && dir[0]) {
+    const rootDir = dir[0];
+    event.reply("OPEN_FILE_DIALOG", { rootDir });
+  } else {
+    event.reply("OPEN_FILE_DIALOG", {});
+  }
+});
+
+ipcMain.on("WRITE_FILE", (event, [payload, content]) => {
+  fs.writeFileSync(payload, content);
+  // send response to frontend
+  event.reply("WRITE_FILE", "Saved!");
 });
