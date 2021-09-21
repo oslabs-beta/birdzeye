@@ -4,13 +4,15 @@
       :directory-name="directory"
       v-for="directory in allDirectories"
       :key="directory"
-      parent-path="."
+      :parent-path="pathToDirectory"
+      @selected-path="selectFilePath"
     ></directory>
     <file
       :file-name="file"
       v-for="file in allFiles"
       :key="file"
-      parent-path="."
+      :parent-path="pathToDirectory"
+      @selected-file-path="selectFilePath"
     ></file>
   </div>
 </template>
@@ -21,6 +23,7 @@ import File from "./File.vue";
 
 export default {
   props: ['rootdir'],
+  emits: ['selected-path'],
   mounted() {
     console.log(this.rootdir, 'this.rootdir in DirectoryList mounted');
     // handle reply from the backend
@@ -34,9 +37,9 @@ export default {
       });
     console.log(this.directory, 'this.directory in DirectoryList');
     //this.directory is the file path passed from the pop up on the opening page
-    this.getDirectories(this.directory);
+    this.getDirectories(this.pathToDirectory);
     // console.log("this.allDirectories :", typeof this.allDirectories);
-    this.getFiles(this.directory);
+    this.getFiles(this.pathToDirectory);
   },
   
   components: {
@@ -47,7 +50,7 @@ export default {
     return {
       allDirectories: [],
       allFiles: [],
-      directory: this.rootdir + '/',
+      pathToDirectory: this.rootdir + '/',
     };
   },
   methods: {
@@ -60,6 +63,9 @@ export default {
       // ask backend to read file
       const payload = { path };
       window.ipc.send("READ_FILE", payload);
+    },
+    selectFilePath(data) {
+      this.$emit('selected-path', data);
     },
   },
 };

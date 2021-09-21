@@ -1,6 +1,6 @@
 <template>
   <div>
-    <DirectoryList :rootdir="rootdir">Directory List</DirectoryList>
+    <DirectoryList :rootdir="rootdir" @selected-path="selectFilePath">Directory List</DirectoryList>
   </div>
 </template>
 
@@ -12,6 +12,7 @@ export default {
 console.log(this.rootdir, 'this.rootdir in DirectoryContainer');
   },
   props: ['rootdir'],
+  emits: ['selected-path'],
   components: {
     DirectoryList,
   },
@@ -20,6 +21,10 @@ console.log(this.rootdir, 'this.rootdir in DirectoryContainer');
       allDirectories: [],
     };
   },
-  methods: {},
+  methods: {
+    selectFilePath(data) {
+      this.$emit('selected-path', data);
+    }
+  },
 };
 </script>

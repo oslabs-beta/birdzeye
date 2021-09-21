@@ -158,7 +158,7 @@ ipcMain.on("READ_SUBDIRECTORY", (event, payload) => {
   const contentFiles = [];
   const rootDirectoryName = payload.path;
   // console.log("payload.path: ", payload.path);
-  let grabFiles = fs.readdirSync(rootDirectoryName, { withFileTypes: true });
+  let grabFiles = fs.readdirSync(path.resolve("/", rootDirectoryName), { withFileTypes: true });
   // console.log("grabFiles", grabFiles);
   for (let fileObj of grabFiles) {
     // console.log("fileObj", fileObj);
@@ -175,7 +175,7 @@ ipcMain.on("READ_SUBDIRECTORY", (event, payload) => {
 ipcMain.on("READ_SUBFILE", (event, payload) => {
   const contentFiles = [];
   const rootFileName = payload.path;
-  let grabFiles = fs.readdirSync(rootFileName, { withFileTypes: true });
+  let grabFiles = fs.readdirSync(path.resolve("/", rootFileName), { withFileTypes: true });
   for (let fileObj of grabFiles) {
     let filePath = rootFileName + "/" + fileObj.name;
     if (fs.lstatSync(filePath).isFile()) {

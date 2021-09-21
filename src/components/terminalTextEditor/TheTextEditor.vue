@@ -1,5 +1,7 @@
 <template>
   <section>
+    <h2> FILEPATH {{ currFilePath }}</h2>
+    <button @click="updateFilePath(currFilePath)">Start Text Editor</button>
     <button @click="handleSave">Save</button>
     <textarea ref="editor" :value="activeDocument"></textarea>
   </section>
@@ -17,14 +19,30 @@ import "codemirror/mode/sass/sass.js";
 import "codemirror/mode/vue/vue.js";
 import "codemirror/mode/xml/xml.js";
 import "codemirror/addon/edit/closebrackets.js";
+import { mapGetters } from 'vuex';
 
 export default {
+  props: ["fileName"],
   data() {
     return {
       activeDocument: '',
-      filePath: './src/App.vue',
+      filePath: this.currFilePath,
       textEditorSave: this.handleSave.bind(this),
     };
+  },
+  computed: {
+    ...mapGetters({
+      currFilePath: 'getCurrFilePath',
+    })
+  },
+  watch: {
+    currFilePath(newPath){
+      if (this.filePath){
+        console.log(newPath, '....  newPATH    .....')
+         console.log(this.currFilePath, '.......currFilePath.........')
+         newPath = this.getFile(this.currFilePath)
+      }
+    }
   },
   mounted() {
     window.ipc.on("READ_FILECONTENTS", (payload) => {
@@ -33,9 +51,12 @@ export default {
         // run line below in this function in order to update activeDocument before editor renders to screen
         this.cm.getDoc().setValue(this.activeDocument);
       })
-    if (this.filePath) {
-      this.getFile(this.filePath)
-    }
+    // if (this.currFilePath) {
+    // console.log(this.currFilePath, '.......currFilePath.........')
+    //   this.getFile(this.currFilePath)
+    // }
+    // console.log(this.currFilePath, '.......currFilePath.........')
+    // this.getFile(this.currFilePath)
     
     this.cm = Codemirror.fromTextArea(this.$refs.editor, {
       lineNumbers: true,
@@ -50,8 +71,11 @@ export default {
     })
     this.cm.setSize("100%", "400");
     this.handleFileType(this.filePath);
+    // this.handleFileType(this.currFilePath);
   },
   updated() {
+    console.log(this.filePath, 'filePath')
+    console.log(this.currFilePath, 'currFilePath')
     this.cm.on('change', this.updateTextArea);
   },
   methods: {
@@ -60,8 +84,15 @@ export default {
       const payload = { path };
       window.ipc.send("READ_FILECONTENTS", payload);
     },
+    updateFilePath(newFilePath) {
+      this.filePath = newFilePath;
+      console.log(this.filePath, '.... this.filePath after button click...');
+      this.getFile(this.filePath);
+      this.handleFileType(this.filePath);
+    },
     handleFileType(filePath) {
       let fileType = '';
+      if (filePath) {
       for (let i = filePath.length; i > 0; i--) {
         if (filePath[i] === '.') {
           fileType = filePath.slice(i + 1);
@@ -87,6 +118,7 @@ export default {
         default:
           return undefined;      
       }
+      } 
     },
     updateTextArea() {
       // read file on local machine and save to property 
@@ -106,5 +138,8 @@ button {
 }
 section {
   text-align: left;
+}
+h2 {
+  color: white;
 }
 </style>
