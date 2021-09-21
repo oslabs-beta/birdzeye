@@ -108,13 +108,6 @@ if (isDevelopment) {
 }
 
 //Added by BMB
-// ipcMain.on("READ_FILE", (event, payload) => {
-//   const contentFiles = fs
-//     .readdirSync(payload.path, { withFileTypes: true })
-//     .filter((dirent) => fs.lstatSync(dirent.name).isFile())
-//     .map((dirent) => dirent.name);
-//   event.reply("READ_FILE", { contentFiles });
-// });
 
 ipcMain.on("READ_DIRECTORY", (event, payload) => {
   const contentFiles = [];
@@ -189,13 +182,18 @@ ipcMain.on("READ_SUBFILE", (event, payload) => {
 
 ipcMain.on("RUN_COMMAND", (event, payload) => {
   let commandResponse;
-  exec(payload.command, (error, stdout, stderr) => {
+  exec(payload.command, { cwd: payload.root }, (error, stdout, stderr) => {
+    // exec(payload.command, (error, stdout, stderr) => {
     if (error) {
       console.log(`error: ${error.message}`);
+      commandResponse = error;
+      event.reply("RUN_COMMAND", { commandResponse });
       return;
     }
     if (stderr) {
       console.log(`stderr: ${stderr}`);
+      commandResponse = stderr;
+      event.reply("RUN_COMMAND", { commandResponse });
       return;
     }
     console.log(`stdout: ${stdout}`);

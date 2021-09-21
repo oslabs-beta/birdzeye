@@ -12,7 +12,7 @@
         height="200"
         width="300"
       />
-      <TerminalV2Container></TerminalV2Container>
+      <TerminalV2Container :rootdir="projectRoot"></TerminalV2Container>
       <DirectoryContainer :rootdir="projectRoot"></DirectoryContainer>
       <TheSimulatorContainer />
       <TheComponentTreeContainer />

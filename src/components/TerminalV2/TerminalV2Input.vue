@@ -1,10 +1,12 @@
 <template>
   <div>
-    <button @click="executeShellCommand(command)">Execute Command</button>
+    <button>{{ rootdir }}</button>
+    <button @click="executeShellCommand(command, rootDirectory)">
+      Execute Command
+    </button>
 
-    /////////////////////////////////////////
     <div>{{ commandResponseDisplay }}</div>
-    /////////////////////////////////////////
+
     <terminal-v-2-output></terminal-v-2-output>
   </div>
 </template>
@@ -13,6 +15,7 @@
 import TerminalV2Output from "./TerminalV2Output.vue";
 
 export default {
+  props: ["rootdir"],
   mounted() {
     // handle reply from the backend for files
     window.ipc.on("RUN_COMMAND", (payload) => {
@@ -29,11 +32,12 @@ export default {
     return {
       commandResponseDisplay: "",
       command: "mkdir test",
+      rootDirectory: this.rootdir,
     };
   },
   methods: {
-    executeShellCommand(command) {
-      const payload = { command };
+    executeShellCommand(command, root) {
+      const payload = { command, root };
       window.ipc.send("RUN_COMMAND", payload);
     },
   },
