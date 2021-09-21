@@ -1,11 +1,81 @@
 <template>   
-  <div></div>
+  <div>filePathList: {{ filePathList }}</div>
+  <div>selectedPath : {{ selectedPath }}</div>
+  <TheTab 
+    :key="filePath"
+    :file-name="selectedPath"
+  />
 </template>
 
 <script>
+import TheTab from "./TheTab.vue";
 
 export default {
+  components: {
+    TheTab,
+  },
+  // props: ["selectedFilePath"],
+  data() {
+    return {
+      filePathList: this.filePath,
+      selectedPath: this.filePath[1],
+    }
+  },
+  // updated() {
+ 
+  //   console.log(this.selectedPath, '........   selectedPath    ........')
+  //   this.filePath()
+  //      console.log(this.filePathList, '.....   filePathList   ......')
+  // },
+  // computed: {
+  //   filePath() {
+  //     return this.$store.getters.filePathList
+  //   }a
+  // },
+  mounted() {
+    this.filePath()
+    // this.selectedFilePath()
+       console.log(this.filePathList, '.....   filePathList   ......')
+       console.log(this.selectedPath, '.....   selectedPath   ......')
+  },
+  updated() {
+    this.selectedPath = this.filePathList[this.filePathList.length - 1]
+  },
+  methods: {
+    filePath() {
+      this.filePathList = this.$store.getters.filePathList
+      this.selectedPath = this.filePathList[0]
+    },
+    // selectedFilePath() {
+    //   this.selectedPath = this.$store.getters.currentFilePath
+    // }
+  },
+  computed: {
 
+  }
+  // computed: {
+  //   allFiles() {
+  //     return this.$store.getters.filePathList;
+  //   }
+  // },
+  // computed: {
+  //   allFiles() {
+  //     return this.$store.getters.filePathList;
+  //   }
+  // },
+  // computed: {
+  //   filePathList(state) {
+  //     console.log(state, '......   state   ....')
+  //     // console.log(this.$store.state.filePathList, 'this.$store.state.filePathList')
+  //     return this.$store.state.filePathList
+  //     // return state.filePathList
+  //   }
+  //   // filePathList() {
+  //   //   console.log(this.$store.getters.filePathList, '.......   this.$state.filePathList   ........')
+  //   //   return this.$store.getters.filePathList
+  //   // }
+  //   // console.log(this.$store.getters.filePathList(), '.......   this.$state.filePathList   ........')
+  // },
 }
 </script>
 

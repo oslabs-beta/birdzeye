@@ -13,11 +13,11 @@
         width="300"
       />
       <TerminalV2Container></TerminalV2Container>
-      <DirectoryContainer :rootdir="projectRoot"></DirectoryContainer>
+      <DirectoryContainer :rootdir="projectRoot" @selected-path="selectFilePath"></DirectoryContainer>
       <TheSimulatorContainer />
       <TheComponentTreeContainer />
-      <TheTabContainer />
-      <TheTerminalTextEditorContainer />
+      <TheTabContainer :selected-file-path="selectedFilePath"/>
+      <!-- <TheTerminalTextEditorContainer /> -->
     </div>
   </div>
 </template>
@@ -27,7 +27,7 @@ import DirectoryContainer from "./components/directory/DirectoryContainer.vue";
 import TheSimulatorContainer from "./components/simulator/TheSimulatorContainer.vue";
 import TheComponentTreeContainer from "./components/componentTree/TheComponentTreeContainer.vue";
 import TheTabContainer from './components/tab/TheTabContainer.vue';
-import TheTerminalTextEditorContainer from "./components/terminalTextEditor/TheTerminalTextEditorContainer.vue";
+// import TheTerminalTextEditorContainer from "./components/terminalTextEditor/TheTerminalTextEditorContainer.vue";
 import TerminalV2Container from "./components/TerminalV2/TerminalV2Container.vue";
 import TheOpeningPage from "./components/TheOpeningPage.vue";
 
@@ -38,6 +38,7 @@ export default {
     return {
       displayOpen: true,
       projectRoot: "root",
+      selectedFilePath: 'paaaaath',
     };
   },
   // provide() {
@@ -50,7 +51,7 @@ export default {
     DirectoryContainer,
     TheSimulatorContainer,
     TheTabContainer,
-    TheTerminalTextEditorContainer,
+    // TheTerminalTextEditorContainer,
     TheComponentTreeContainer,
     TerminalV2Container,
     // TerminalContainer,
@@ -73,6 +74,14 @@ export default {
       this.projectRoot = rootDir;
       console.log(this.projectRoot, "this.projectRoot in App.vue");
     },
+    selectFilePath(data) {
+      this.selectedFilePath = data;
+    }
+  },
+  mounted() {
+    // this.$root.$on('selected-file-path', (data) => {
+    //   console.log(data, '......   data   ......')
+    // })
   },
 };
 </script>
