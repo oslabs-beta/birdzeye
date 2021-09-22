@@ -1,5 +1,12 @@
 <template>
-  <iframe id="sim" :src="projecturl"></iframe>
+<img
+        v-if="projecturl.length < 19 "
+        alt="Birdzeye logo"
+        src="../../assets/birdzeye.png"
+        height="400"
+        width="600"
+      />
+  <iframe v-else id="sim" :src="projecturl"></iframe>
   <form @click.prevent="choosePort" @keydown.enter.prevent="choosePort">
     <input id="portChoice" placeholder="http://localhost:____/" v-model="portNumber">
     <submit>Enter Port Number</submit>
