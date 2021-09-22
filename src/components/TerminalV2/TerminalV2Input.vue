@@ -4,7 +4,7 @@
     <button @click="executeShellCommand(command, rootDirectory)">
       Execute Command
     </button>
-    <textarea></textarea>
+    <textarea v-model="command"></textarea>
     <div>{{ commandResponseDisplay }}</div>
 
     <terminal-v-2-output></terminal-v-2-output>
@@ -28,7 +28,7 @@ export default {
   data() {
     return {
       commandResponseDisplay: "",
-      command: "mkdir test",
+      command: "",
       rootDirectory: this.rootdir,
     };
   },

@@ -211,3 +211,20 @@ ipcMain.on("WRITE_FILE", (event, [payload, content]) => {
   // send response to frontend
   event.reply("WRITE_FILE", "Saved!");
 });
+
+//************** Get path for component tree ****************/
+ipcMain.on("GET_APP_PATH", (event) => {
+  // Use Electron dialog box to get file path to serve as root
+  const appFilePath = dialog.showOpenDialogSync({
+    title: "Select TOP LEVEL App Component",
+    buttonLabel: "Choose",
+    properties: ["openFile"],
+  });
+  // User can press cancel instead of choosing a directory, so dir could be an empty array
+  if (appFilePath && appFilePath[0]) {
+    const path = appFilePath[0];
+    event.reply("GET_APP_PATH", { path });
+  } else {
+    event.reply("GET_APP_PATH", {});
+  }
+});

@@ -9,6 +9,7 @@ const validChannels = [
   "RUN_COMMAND",
   "READ_FILECONTENTS",
   "OPEN_FILE_DIALOG",
+  "GET_APP_PATH",
 ];
 
 contextBridge.exposeInMainWorld("ipc", {
