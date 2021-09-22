@@ -20,10 +20,6 @@ export default {
       filePath: this.parentPath + "/" + this.fileName,
     };
   },
-  // updated() {
-  //   this.filePath = this.parentPath + "/" + this.fileName
-  //   // console.log(this.parentPath + "/" + this.fileName, '...... filePath   ......')
-  // },
   computed: {
     allFiles() {
       return this.$store.getters.filePathList;

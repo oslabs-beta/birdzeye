@@ -12,7 +12,6 @@
 </template>
 
 <script>
-// import App from "../../App.vue";
 import App from "../../App.vue";
 import AppChildComponent from "./AppChildComponent.vue";
 

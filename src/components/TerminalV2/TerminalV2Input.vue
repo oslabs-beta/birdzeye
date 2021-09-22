@@ -19,11 +19,8 @@ export default {
   mounted() {
     // handle reply from the backend for files
     window.ipc.on("RUN_COMMAND", (payload) => {
-      // console.log("payload.contentFiles", payload.contentFiles);
       this.commandResponseDisplay = payload.commandResponse;
-      console.log("payload", payload);
     });
-    // this.executeShellCommand("ls");
   },
   components: {
     TerminalV2Output,
