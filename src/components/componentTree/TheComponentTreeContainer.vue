@@ -14,6 +14,7 @@
 
 <script>
 import AppChildComponent from "./AppChildComponent.vue";
+import App from "../../App.vue";
 // import InitComponentTreeButton from "./InitComponentTreeButton.vue";
 // import App from {this.appPath}
 // let pathToApp;
@@ -44,6 +45,7 @@ export default {
       }
       // this.getChildrenComponents(App);
     });
+    this.getChildrenComponents(App);
   },
   components: {
     AppChildComponent,
