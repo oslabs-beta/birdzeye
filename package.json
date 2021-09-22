@@ -16,6 +16,7 @@
   "dependencies": {
     "codemirror": "^5.62.3",
     "core-js": "^3.6.5",
+    "material-design-icons": "^3.0.1",
     "node-pty": "^0.10.1",
     "vue": "^3.0.0",
     "vuex": "^4.0.2",
