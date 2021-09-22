@@ -1,16 +1,19 @@
 <template>
   <div>
-    <button>{{ configKeys }}</button> :
-    <button>{{ configValue }}</button>
+    <button @click="getAppRoot">Start tree</button>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["configKeys", "configValue"],
+  props: [],
   data() {
     return {};
   },
-  methods: {},
+  methods: {
+    getAppRoot() {
+      window.ipc.send("GET_APP_PATH");
+    },
+  },
 };
 </script>

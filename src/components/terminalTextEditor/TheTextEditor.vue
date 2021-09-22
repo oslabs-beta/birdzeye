@@ -1,6 +1,5 @@
 <template>
   <section>
-    <h2> FILEPATH {{ currFilePath }}</h2>
     <button @click="updateFilePath(currFilePath)">Start Text Editor</button>
     <button @click="handleSave">Save</button>
     <textarea ref="editor" :value="activeDocument"></textarea>
@@ -35,28 +34,11 @@ export default {
       currFilePath: 'getCurrFilePath',
     })
   },
-  watch: {
-    currFilePath(newPath){
-      if (this.filePath){
-        console.log(newPath, '....  newPATH    .....')
-         console.log(this.currFilePath, '.......currFilePath.........')
-         newPath = this.getFile(this.currFilePath)
-      }
-    }
-  },
   mounted() {
     window.ipc.on("READ_FILECONTENTS", (payload) => {
-        // console.log(payload.grabFiles, 'This is the payload.grabFiles on the front end')
         this.activeDocument = payload.grabFiles;
-        // run line below in this function in order to update activeDocument before editor renders to screen
         this.cm.getDoc().setValue(this.activeDocument);
       })
-    // if (this.currFilePath) {
-    // console.log(this.currFilePath, '.......currFilePath.........')
-    //   this.getFile(this.currFilePath)
-    // }
-    // console.log(this.currFilePath, '.......currFilePath.........')
-    // this.getFile(this.currFilePath)
     
     this.cm = Codemirror.fromTextArea(this.$refs.editor, {
       lineNumbers: true,
@@ -71,11 +53,8 @@ export default {
     })
     this.cm.setSize("100%", "400");
     this.handleFileType(this.filePath);
-    // this.handleFileType(this.currFilePath);
   },
   updated() {
-    console.log(this.filePath, 'filePath')
-    console.log(this.currFilePath, 'currFilePath')
     this.cm.on('change', this.updateTextArea);
   },
   methods: {
@@ -86,7 +65,6 @@ export default {
     },
     updateFilePath(newFilePath) {
       this.filePath = newFilePath;
-      console.log(this.filePath, '.... this.filePath after button click...');
       this.getFile(this.filePath);
       this.handleFileType(this.filePath);
     },

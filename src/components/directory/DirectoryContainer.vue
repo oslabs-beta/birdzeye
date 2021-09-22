@@ -12,9 +12,6 @@ import DirectoryList from "./DirectoryList.vue";
 import TheDirectoryListRefreshButton from "./TheDirectoryListRefreshButton.vue";
 
 export default {
-  mounted() {
-    console.log(this.rootdir, "this.rootdir in DirectoryContainer");
-  },
   props: ["rootdir"],
   components: {
     DirectoryList,

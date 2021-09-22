@@ -4,7 +4,7 @@
     <button @click="executeShellCommand(command, rootDirectory)">
       Execute Command
     </button>
-    <textarea></textarea>
+    <textarea v-model="command"></textarea>
     <div>{{ commandResponseDisplay }}</div>
 
     <terminal-v-2-output></terminal-v-2-output>
@@ -19,11 +19,8 @@ export default {
   mounted() {
     // handle reply from the backend for files
     window.ipc.on("RUN_COMMAND", (payload) => {
-      // console.log("payload.contentFiles", payload.contentFiles);
       this.commandResponseDisplay = payload.commandResponse;
-      console.log("payload", payload);
     });
-    // this.executeShellCommand("ls");
   },
   components: {
     TerminalV2Output,
@@ -31,7 +28,7 @@ export default {
   data() {
     return {
       commandResponseDisplay: "",
-      command: "mkdir test",
+      command: "",
       rootDirectory: this.rootdir,
     };
   },

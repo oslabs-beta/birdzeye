@@ -6,18 +6,17 @@
       @save-root-dir="setRoot"
     />
     <div v-else>
+      <div>{{ projectRoot }}</div>
       <img
         alt="Birdzeye logo"
         src="./assets/birdzeye.png"
         height="200"
         width="300"
       />
-      <TerminalV2Container :rootdir="projectRoot"></TerminalV2Container>
       <DirectoryContainer :rootdir="projectRoot"></DirectoryContainer>
       <TheSimulatorContainer />
       <TheComponentTreeContainer />
-      <TheTabContainer :selected-file-path="selectedFilePath" />
-      <!-- <TheTerminalTextEditorContainer /> -->
+      <TheTabContainer :rootdir="projectRoot"/>
     </div>
   </div>
 </template>
@@ -27,8 +26,6 @@ import DirectoryContainer from "./components/directory/DirectoryContainer.vue";
 import TheSimulatorContainer from "./components/simulator/TheSimulatorContainer.vue";
 import TheComponentTreeContainer from "./components/componentTree/TheComponentTreeContainer.vue";
 import TheTabContainer from "./components/tab/TheTabContainer.vue";
-// import TheTerminalTextEditorContainer from "./components/terminalTextEditor/TheTerminalTextEditorContainer.vue";
-import TerminalV2Container from "./components/TerminalV2/TerminalV2Container.vue";
 import TheOpeningPage from "./components/TheOpeningPage.vue";
 
 export default {
@@ -38,26 +35,14 @@ export default {
     return {
       displayOpen: true,
       projectRoot: "root",
-      selectedFilePath: "paaaaath",
     };
   },
-  // provide() {
-  //   //Send path to root file of project to DirectoryList
-  //   return {
-  //   rootdir: this.projectRoot
-  // }
-  // },
   components: {
     DirectoryContainer,
     TheSimulatorContainer,
     TheTabContainer,
-    // TheTerminalTextEditorContainer,
     TheComponentTreeContainer,
-    TerminalV2Container,
-    // TerminalContainer,
-    // SimulatorContainer,
     TheOpeningPage,
-    // TabContainer
   },
   methods: {
     getDirectories(path) {
@@ -72,16 +57,7 @@ export default {
     setRoot(rootDir) {
       //receive emit from opening page with root directory path
       this.projectRoot = rootDir;
-      console.log(this.projectRoot, "this.projectRoot in App.vue");
     },
-    selectFilePath(data) {
-      this.selectedFilePath = data;
-    },
-  },
-  mounted() {
-    // this.$root.$on('selected-file-path', (data) => {
-    //   console.log(data, '......   data   ......')
-    // })
   },
 };
 </script>
