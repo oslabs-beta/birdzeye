@@ -1,7 +1,8 @@
 <template>
-  <div>
+  <section>
     <button @click="toggleFiles">{{ directoryName }}</button>
     <file
+      class="file-wrapper"
       :file-name="file"
       v-for="file in allFiles"
       :key="file"
@@ -15,7 +16,7 @@
       :parent-path="path"
       v-show="showFiles === true"
     ></directory>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -77,3 +78,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.file-wrapper {
+  padding-left: 10px;
+}
+</style>

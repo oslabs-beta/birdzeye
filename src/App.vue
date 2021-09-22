@@ -5,7 +5,10 @@
       @save-root-dir="setRoot"
       @root-name="getRootName"
     />
-    <div v-else>
+    <div 
+      v-else
+      class="components-wrapper"
+    >
       <!-- <section>{{ projectRoot }}</section> -->
       <!-- <img
         alt="Birdzeye logo"
@@ -13,13 +16,17 @@
         height="200"
         width="300"
       /> -->
-      <DirectoryContainer 
-        :rootdir="projectRoot" 
-        :directory-name="directoryName"
-      ></DirectoryContainer>
-      <TheSimulatorContainer />
-      <TheComponentTreeContainer />
-      <TheTabContainer :rootdir="projectRoot"/>
+      <section class="directory-comptree-wrapper">
+        <DirectoryContainer 
+          :rootdir="projectRoot" 
+          :directory-name="directoryName"
+        ></DirectoryContainer>
+        <TheComponentTreeContainer />
+      </section>
+      <section class="sim-tab-wrapper">
+        <TheSimulatorContainer />
+        <TheTabContainer :rootdir="projectRoot"/>
+      </section>
     </div>
 </template>
 
@@ -75,7 +82,14 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   color: rgb(255, 255, 255);
 }
-section {
-
+.components-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+.directory-comptree-wrapper {
+  width: 20%;
+}
+.sim-tab-wrapper {
+  width: 80%;
 }
 </style>

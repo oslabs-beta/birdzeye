@@ -1,5 +1,8 @@
 <template>
-  <div v-if="projecturl.length < 19">
+  <div 
+    v-if="projecturl.length < 19"
+    id="sim-bg"
+  >
     <img src="../../assets/birdzeye.png" alt="Birdzeye">
   </div>
   <iframe v-else id="sim" :src="projecturl"></iframe>
@@ -29,6 +32,16 @@ export default {
 </script>
 
 <style scoped>
+  #sim-bg {
+    height: 30em;
+    width: 40em;
+    position: relative;
+  }
+  img {
+    /* position: absolute; */
+    text-align: center;
+    width: 300px;
+  }
   #sim {
     border: 1px;
     background-color: rgb(40, 209, 49);
