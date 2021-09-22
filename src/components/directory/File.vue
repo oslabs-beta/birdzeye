@@ -1,7 +1,6 @@
 <template>
   <div>
-    <h2>{{ allFiles }}</h2>
-    <button @click="handleSelectPath" >{{ fileName }}</button>
+    <button @click="handleSelectPath">{{ fileName }}</button>
     <!-- <right-click-form>Right Click Form</right-click-form> -->
   </div>
 </template>
@@ -10,11 +9,8 @@
 // import RightClickForm from "./RightClickForm.vue";
 
 export default {
-  // mounted(){
-  //   this.handleSelectPath()
-  // },
   props: ["fileName", "parentPath"],
-  emits: ["selected-file-path"],
+
   components: {
     // RightClickForm,
   },
@@ -34,20 +30,11 @@ export default {
     },
   },
   methods: {
-   handleSelectPath() {
-     const path = this.filePath
-     this.$store.dispatch("addFilePath", { path });
-   },
-  //  choosePath() {
-  //    const path = this.filePath
-  //    this.$store.dispatch("addFilePath", { path });
-  //  }
-    // handleSelectPath() {
-    //   this.$emit("selected-file-path", this.filePath)
-    //     //  console.log(this.parentPath + "/" + this.fileName, '...... filePath   ......')
-    //     //  console.log(this.filePath, '...... filePath   ......')
-    // }
-  }
+    handleSelectPath() {
+      const path = this.filePath;
+      this.$store.dispatch("addFilePath", { path });
+    },
+  },
 };
 </script>
 

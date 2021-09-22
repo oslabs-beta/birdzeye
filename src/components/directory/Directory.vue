@@ -7,7 +7,6 @@
       :key="file"
       :parent-path="path"
       v-show="showFiles === true"
-      @selected-file-path="selectFilePath"
     ></file>
     <directory
       :directory-name="directory"
@@ -40,7 +39,6 @@ export default {
     this.getFiles(this.path);
   },
   props: ["directoryName", "parentPath"],
-  emits: ["selected-path"],
   components: {
     File,
   },
@@ -52,12 +50,13 @@ export default {
       allSubDirectories: [],
       showFiles: false,
       path: this.parentPath + "/" + this.directoryName,
-      filePath: '',
+      filePath: "",
     };
   },
   methods: {
     toggleFiles() {
       this.showFiles = !this.showFiles;
+      console.log("this button works");
     },
 
     getSubDirectories(path) {
@@ -77,10 +76,6 @@ export default {
         window.ipc.send("READ_SUBFILE", payload);
       }
     },
-    selectFilePath(data) {
-      console.log(data, '..... data from directory ....')
-      this.$emit('selected-path', data)
-    }
   },
 };
 </script>

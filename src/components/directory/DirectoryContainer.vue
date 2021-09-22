@@ -1,30 +1,29 @@
 <template>
   <div>
-    <DirectoryList :rootdir="rootdir" @selected-path="selectFilePath">Directory List</DirectoryList>
+    <TheDirectoryListRefreshButton
+      :rootdir="rootdir"
+    ></TheDirectoryListRefreshButton>
+    <DirectoryList :rootdir="rootdir">Directory List</DirectoryList>
   </div>
 </template>
 
 <script>
 import DirectoryList from "./DirectoryList.vue";
+import TheDirectoryListRefreshButton from "./TheDirectoryListRefreshButton.vue";
 
 export default {
   mounted() {
-console.log(this.rootdir, 'this.rootdir in DirectoryContainer');
+    console.log(this.rootdir, "this.rootdir in DirectoryContainer");
   },
-  props: ['rootdir'],
-  emits: ['selected-path'],
+  props: ["rootdir"],
   components: {
     DirectoryList,
+    TheDirectoryListRefreshButton,
   },
   data() {
     return {
       allDirectories: [],
     };
-  },
-  methods: {
-    selectFilePath(data) {
-      this.$emit('selected-path', data);
-    }
   },
 };
 </script>

@@ -18,8 +18,8 @@ protocol.registerSchemesAsPrivileged([
 async function createWindow() {
   // Create the browser window.
   const win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1200,
+    height: 1000,
     webPreferences: {
       // Use pluginOptions.nodeIntegration, leave this alone
       // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
@@ -108,13 +108,6 @@ if (isDevelopment) {
 }
 
 //Added by BMB
-// ipcMain.on("READ_FILE", (event, payload) => {
-//   const contentFiles = fs
-//     .readdirSync(payload.path, { withFileTypes: true })
-//     .filter((dirent) => fs.lstatSync(dirent.name).isFile())
-//     .map((dirent) => dirent.name);
-//   event.reply("READ_FILE", { contentFiles });
-// });
 
 ipcMain.on("READ_DIRECTORY", (event, payload) => {
   const contentFiles = [];
@@ -158,7 +151,9 @@ ipcMain.on("READ_SUBDIRECTORY", (event, payload) => {
   const contentFiles = [];
   const rootDirectoryName = payload.path;
   // console.log("payload.path: ", payload.path);
-  let grabFiles = fs.readdirSync(path.resolve("/", rootDirectoryName), { withFileTypes: true });
+  let grabFiles = fs.readdirSync(path.resolve("/", rootDirectoryName), {
+    withFileTypes: true,
+  });
   // console.log("grabFiles", grabFiles);
   for (let fileObj of grabFiles) {
     // console.log("fileObj", fileObj);
@@ -175,7 +170,9 @@ ipcMain.on("READ_SUBDIRECTORY", (event, payload) => {
 ipcMain.on("READ_SUBFILE", (event, payload) => {
   const contentFiles = [];
   const rootFileName = payload.path;
-  let grabFiles = fs.readdirSync(path.resolve("/", rootFileName), { withFileTypes: true });
+  let grabFiles = fs.readdirSync(path.resolve("/", rootFileName), {
+    withFileTypes: true,
+  });
   for (let fileObj of grabFiles) {
     let filePath = rootFileName + "/" + fileObj.name;
     if (fs.lstatSync(filePath).isFile()) {
@@ -189,13 +186,18 @@ ipcMain.on("READ_SUBFILE", (event, payload) => {
 
 ipcMain.on("RUN_COMMAND", (event, payload) => {
   let commandResponse;
-  exec(payload.command, (error, stdout, stderr) => {
+  exec(payload.command, { cwd: payload.root }, (error, stdout, stderr) => {
+    // exec(payload.command, (error, stdout, stderr) => {
     if (error) {
       console.log(`error: ${error.message}`);
+      commandResponse = error;
+      event.reply("RUN_COMMAND", { commandResponse });
       return;
     }
     if (stderr) {
       console.log(`stderr: ${stderr}`);
+      commandResponse = stderr;
+      event.reply("RUN_COMMAND", { commandResponse });
       return;
     }
     console.log(`stdout: ${stdout}`);

@@ -12,11 +12,11 @@
         height="200"
         width="300"
       />
-      <TerminalV2Container></TerminalV2Container>
-      <DirectoryContainer :rootdir="projectRoot" @selected-path="selectFilePath"></DirectoryContainer>
+      <TerminalV2Container :rootdir="projectRoot"></TerminalV2Container>
+      <DirectoryContainer :rootdir="projectRoot"></DirectoryContainer>
       <TheSimulatorContainer />
       <TheComponentTreeContainer />
-      <TheTabContainer :selected-file-path="selectedFilePath"/>
+      <TheTabContainer :selected-file-path="selectedFilePath" />
       <!-- <TheTerminalTextEditorContainer /> -->
     </div>
   </div>
@@ -26,7 +26,7 @@
 import DirectoryContainer from "./components/directory/DirectoryContainer.vue";
 import TheSimulatorContainer from "./components/simulator/TheSimulatorContainer.vue";
 import TheComponentTreeContainer from "./components/componentTree/TheComponentTreeContainer.vue";
-import TheTabContainer from './components/tab/TheTabContainer.vue';
+import TheTabContainer from "./components/tab/TheTabContainer.vue";
 // import TheTerminalTextEditorContainer from "./components/terminalTextEditor/TheTerminalTextEditorContainer.vue";
 import TerminalV2Container from "./components/TerminalV2/TerminalV2Container.vue";
 import TheOpeningPage from "./components/TheOpeningPage.vue";
@@ -38,7 +38,7 @@ export default {
     return {
       displayOpen: true,
       projectRoot: "root",
-      selectedFilePath: 'paaaaath',
+      selectedFilePath: "paaaaath",
     };
   },
   // provide() {
@@ -76,7 +76,7 @@ export default {
     },
     selectFilePath(data) {
       this.selectedFilePath = data;
-    }
+    },
   },
   mounted() {
     // this.$root.$on('selected-file-path', (data) => {
