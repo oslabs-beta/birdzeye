@@ -18,8 +18,8 @@ protocol.registerSchemesAsPrivileged([
 async function createWindow() {
   // Create the browser window.
   const win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1200,
+    height: 1000,
     webPreferences: {
       // Use pluginOptions.nodeIntegration, leave this alone
       // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
@@ -151,7 +151,9 @@ ipcMain.on("READ_SUBDIRECTORY", (event, payload) => {
   const contentFiles = [];
   const rootDirectoryName = payload.path;
   // console.log("payload.path: ", payload.path);
-  let grabFiles = fs.readdirSync(path.resolve("/", rootDirectoryName), { withFileTypes: true });
+  let grabFiles = fs.readdirSync(path.resolve("/", rootDirectoryName), {
+    withFileTypes: true,
+  });
   // console.log("grabFiles", grabFiles);
   for (let fileObj of grabFiles) {
     // console.log("fileObj", fileObj);
@@ -168,7 +170,9 @@ ipcMain.on("READ_SUBDIRECTORY", (event, payload) => {
 ipcMain.on("READ_SUBFILE", (event, payload) => {
   const contentFiles = [];
   const rootFileName = payload.path;
-  let grabFiles = fs.readdirSync(path.resolve("/", rootFileName), { withFileTypes: true });
+  let grabFiles = fs.readdirSync(path.resolve("/", rootFileName), {
+    withFileTypes: true,
+  });
   for (let fileObj of grabFiles) {
     let filePath = rootFileName + "/" + fileObj.name;
     if (fs.lstatSync(filePath).isFile()) {

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h2>{{ allFiles }}</h2>
     <button @click="handleSelectPath">{{ fileName }}</button>
     <!-- <right-click-form>Right Click Form</right-click-form> -->
   </div>

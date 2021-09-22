@@ -4,13 +4,13 @@
       :directory-name="directory"
       v-for="directory in allDirectories"
       :key="directory"
-      parent-path="pathToDirectory"
+      :parent-path="pathToDirectory"
     ></directory>
     <file
       :file-name="file"
       v-for="file in allFiles"
       :key="file"
-      parent-path="pathToDirectory"
+      :parent-path="pathToDirectory"
     ></file>
   </div>
 </template>
