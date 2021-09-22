@@ -75,21 +75,6 @@ app.on("ready", async () => {
     }
   }
   createWindow();
-  // ********Below opens open file dialog upon loading app, but is kind of annoying********
-  // const rootFolder = dialog.showOpenDialogSync({
-  //   title: "Open a Project",
-  //   buttonLabel: "Choose",
-  //   properties: [
-  //     'openDirectory',
-  //   ]
-  // })
-  // const rootDir = fs.readFileSync(rootFolder[0], { encoding: 'utf8' })
-  // console.log(rootDir, 'I am rootDir');
-  // if (!rootDir) {
-  //   return ;
-  // } else {
-  //   return rootDir;
-  // }
 });
 
 // Exit cleanly on request from parent process in development mode.
@@ -114,7 +99,6 @@ ipcMain.on("READ_DIRECTORY", (event, payload) => {
   let grabFiles = fs.readdirSync(path.resolve("/", payload.path), {
     withFileTypes: true,
   });
-  console.log(grabFiles, "grabFiles READ_DIRECTORY");
   for (let fileObj of grabFiles) {
     if (fileObj.name[0] === ".") {
       continue;
@@ -133,14 +117,12 @@ ipcMain.on("READ_FILE", (event, payload) => {
   let grabFiles = fs.readdirSync(path.resolve("/", payload.path), {
     withFileTypes: true,
   });
-  console.log(grabFiles, "grabFiles READ_FILE");
   for (let fileObj of grabFiles) {
     if (fileObj.name[0] !== ".") {
       //add the parent path to the name of the file so that lstat can find the file
       const filePath = payload.path + fileObj.name;
       if (fs.lstatSync(filePath).isFile()) {
         contentFiles.push(fileObj.name);
-        // console.log(fileObj, 'fileObj');
       }
     }
     event.reply("READ_FILE", { contentFiles });
@@ -150,18 +132,13 @@ ipcMain.on("READ_FILE", (event, payload) => {
 ipcMain.on("READ_SUBDIRECTORY", (event, payload) => {
   const contentFiles = [];
   const rootDirectoryName = payload.path;
-  // console.log("payload.path: ", payload.path);
   let grabFiles = fs.readdirSync(path.resolve("/", rootDirectoryName), {
     withFileTypes: true,
   });
-  // console.log("grabFiles", grabFiles);
   for (let fileObj of grabFiles) {
-    // console.log("fileObj", fileObj);
     let filePath = rootDirectoryName + "/" + fileObj.name;
-    // console.log("filePath", filePath);
     if (fs.lstatSync(filePath).isDirectory()) {
       contentFiles.push(fileObj.name);
-      // console.log("contentFiles", contentFiles);
     }
   }
   event.reply("READ_SUBDIRECTORY", { contentFiles, rootDirectoryName });
@@ -177,7 +154,6 @@ ipcMain.on("READ_SUBFILE", (event, payload) => {
     let filePath = rootFileName + "/" + fileObj.name;
     if (fs.lstatSync(filePath).isFile()) {
       contentFiles.push(fileObj.name);
-      // console.log(fileObj, 'fileObj');
     }
   }
 
@@ -187,7 +163,6 @@ ipcMain.on("READ_SUBFILE", (event, payload) => {
 ipcMain.on("RUN_COMMAND", (event, payload) => {
   let commandResponse;
   exec(payload.command, { cwd: payload.root }, (error, stdout, stderr) => {
-    // exec(payload.command, (error, stdout, stderr) => {
     if (error) {
       console.log(`error: ${error.message}`);
       commandResponse = error;
