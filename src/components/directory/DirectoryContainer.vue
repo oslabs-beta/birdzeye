@@ -25,6 +25,5 @@ export default {
       allDirectories: [],
     };
   },
-  methods: {},
 };
 </script>

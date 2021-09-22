@@ -4,7 +4,7 @@
     <button @click="executeShellCommand(command, rootDirectory)">
       Execute Command
     </button>
-
+    <textarea></textarea>
     <div>{{ commandResponseDisplay }}</div>
 
     <terminal-v-2-output></terminal-v-2-output>

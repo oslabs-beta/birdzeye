@@ -4,13 +4,13 @@
       :directory-name="directory"
       v-for="directory in allDirectories"
       :key="directory"
-      parent-path="."
+      parent-path="pathToDirectory"
     ></directory>
     <file
       :file-name="file"
       v-for="file in allFiles"
       :key="file"
-      parent-path="."
+      parent-path="pathToDirectory"
     ></file>
   </div>
 </template>
@@ -31,9 +31,9 @@ export default {
       });
 
     //this.directory is the file path passed from the pop up on the opening page
-    this.getDirectories(this.directory);
+    this.getDirectories(this.pathToDirectory);
 
-    this.getFiles(this.directory);
+    this.getFiles(this.pathToDirectory);
   },
 
   components: {
@@ -44,7 +44,7 @@ export default {
     return {
       allDirectories: [],
       allFiles: [],
-      directory: this.rootdir + "/",
+      pathToDirectory: this.rootdir + "/",
     };
   },
   methods: {

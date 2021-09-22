@@ -50,11 +50,13 @@ export default {
       allSubDirectories: [],
       showFiles: false,
       path: this.parentPath + "/" + this.directoryName,
+      filePath: "",
     };
   },
   methods: {
     toggleFiles() {
       this.showFiles = !this.showFiles;
+      console.log("this button works");
     },
 
     getSubDirectories(path) {

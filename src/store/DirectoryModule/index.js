@@ -12,3 +12,4 @@ export default {
   actions: directoryActions,
   getters: directoryGetters,
 };
+
