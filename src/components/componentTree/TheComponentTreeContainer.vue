@@ -5,13 +5,16 @@
       <!-- <button @click="getAppRoot">Init Tree</button> -->
     </div>
     <!-- <init-component-tree-button></init-component-tree-button> -->
-    <app-child-component
-      v-for="component in childComponentNameList"
-      :key="component"
-      :component-name="component"
-      :component-info="childComponentsObj[component]"
-    >
-    </app-child-component>
+    <div class="cmp-tree">
+      <app-child-component
+        class="app-child-cmp"
+        v-for="component in childComponentNameList"
+        :key="component"
+        :component-name="component"
+        :component-info="childComponentsObj[component]"
+      >
+      </app-child-component>
+    </div>
   </section>
 </template>
 
@@ -84,7 +87,10 @@ export default {
     background-color: #282a36;
     color: #f8f8f2;
     margin-top: 6px;
-    height: 63%;
+    height: 59%;
+    overflow: scroll;
+    position: relative;
+    object-fit: contain;
   }
   .cmp-tree-title-wrapper {
     display: flex;
@@ -96,6 +102,16 @@ export default {
     margin-right: auto;
     opacity: .8;
     padding: 6px 8px;
+  }
+  .cmp-tree {
+    position: absolute;
+    height: auto;
+    width: 100%;
+    padding-left: 10px;
+    padding-top: 10px;
+  }
+  .app-child-cmp {
+    padding: 4px 10px;
   }
   button {
     background-color: #282a36;

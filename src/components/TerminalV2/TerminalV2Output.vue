@@ -1,9 +1,9 @@
 <template>
-  <div></div>
+  <div>{{ cmdResDisplay }}</div>
 </template>
 
 <script>
 export default {
-  props: ["output"],
+  props: ["output", "cmdResDisplay"],
 };
 </script>

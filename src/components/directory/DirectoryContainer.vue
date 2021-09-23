@@ -7,7 +7,9 @@
       ></TheDirectoryListRefreshButton>
     </div>
     <h4>{{ directoryName }}</h4>
-    <DirectoryList :rootdir="rootdir">Directory List</DirectoryList>
+    <div class="dirlist-wrapper">
+      <DirectoryList :rootdir="rootdir">Directory List</DirectoryList>
+    </div>
   </section>
 </template>
 
@@ -34,7 +36,9 @@ export default {
   background-color: #282a36;
   color: #f8f8f2;
   height: 40%;
-      overflow: scroll;
+  position: relative;
+  overflow: scroll;
+  object-fit: contain;
 }
 .file-directory-title-wrapper {
   display: flex;
@@ -54,12 +58,16 @@ button {
   color: #f8f8f2;
   font-weight: 600;
 }
-section {
-  /* padding: 4px 0; */
-}
 h4 {
   font-size: 14px;
   margin: 0;
-  padding: 4px 10px;
+  padding: 4px 18px;
+}
+.dirlist-wrapper {
+  padding: 3px 30px;
+  height: 40%;
+  position: absolute;
+  height: auto;
+  /* overflow: scroll; */
 }
 </style>
