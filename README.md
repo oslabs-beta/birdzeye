@@ -3,7 +3,7 @@
 <p align="center">
  <img src="https://github.com/oslabs-beta/vuety/raw/dev/src/assets/birdzeye2.png" alt="BIRDZ'EYE logo">
 </p>
-
+<h4 align="right">Logo by Natsuki Wada</h4>
 <h3 align="center">BIRDZ'EYE by Team Vuety</h3>
 
 <div align="center">

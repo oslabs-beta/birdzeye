@@ -1,7 +1,22 @@
 <template>
   <section>
-    <button @click="updateFilePath(currFilePath)">Start Text Editor</button>
-    <button @click="handleSave">Save</button>
+    <span 
+      class="material-icons port-texteditorbtn-container"
+      @click="updateFilePath(currFilePath)"
+      alt="sync with text editor"
+    >sync</span>
+    <span 
+      class="material-icons port-texteditorbtn-container"
+      @click="handleSave"
+    >save_alt</span>
+    <!-- <button 
+      class="port-texteditorbtn-container"
+      @click="updateFilePath(currFilePath)"
+    >Start Text Editor</button> -->
+    <!-- <button 
+      class="port-texteditorbtn-container"
+      @click="handleSave"
+    >Save</button> -->
     <textarea ref="editor" :value="activeDocument"></textarea>
   </section>
 </template>
@@ -51,7 +66,7 @@ export default {
         "Ctrl-S": this.textEditorSave,
       } 
     })
-    this.cm.setSize("100%", "500");
+    this.cm.setSize("100%", "556");
     this.handleFileType(this.filePath);
   },
   updated() {
@@ -112,7 +127,11 @@ export default {
 
 <style scoped>
 button {
-  float: right;
+  /* float: right; */
+}
+.material-icons {
+  /* float: right; */
+  padding: 0 6px;
 }
 section {
   display: contents;
@@ -122,10 +141,10 @@ h2 {
   color: white;
 }
 .CodeMirror {
-    position: relative;
-    overflow: hidden;
-    background: white;
-    width: 100%;
-    height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background: white;
+  width: 100%;
+  height: 100vh;
 }
 </style>

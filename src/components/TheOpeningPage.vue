@@ -1,7 +1,7 @@
 <template>
   <section>
     <button @click="rootDirPrompt">Open Project</button>
-    <!-- <img alt="birdzeye logo" src="../assets/birdzeye.png"> -->
+    <img alt="birdzeye logo" src="../assets/birdzeye.png">
   </section>
 </template>
 
@@ -66,12 +66,13 @@ export default {
     margin-top: 50px;
     margin-left: 50px;
   }
-  /* img {
-    opacity: .6;
+  img {
+    width: 124em;
+    /* opacity: .6;
     position: relative;
     top: -200px;
     left: 10px;
     width: 2600px;
-    z-index: -1;
-  } */
+    z-index: -1; */
+  }
 </style>
