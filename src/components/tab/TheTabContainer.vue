@@ -1,11 +1,22 @@
 <template>   
-  <button @click="setDisplay">Toggle</button>
-  <TheTab 
-    v-show="showText"
-    :key="filePath"
-    :file-name="selectedPath"
-  />
-  <TerminalV2Container v-show="showTerm" :rootdir="rootdir"/>
+  <span 
+    class="material-icons port-texteditorbtn-container"
+    @click="setDisplay"
+  >
+  sync_alt
+  </span>
+  <!-- <button 
+    class="port-texteditorbtn-container"
+    @click="setDisplay"
+  >Toggle</button> -->
+  <section class="tab-terminal-wrapper">
+    <TheTab 
+      v-show="showText"
+      :key="filePath"
+      :file-name="selectedPath"
+    />
+    <TerminalV2Container v-show="showTerm" :rootdir="rootdir"/>
+  </section>
 </template>
 
 <script>
@@ -46,5 +57,12 @@ export default {
 </script>
 
 <style scoped>
-  
+  .material-icons {
+    /* float: right; */
+    padding: 0 6px;
+  }
+  .tab-terminal-wrapper {
+    font-family: monospace;
+    margin-left: 4px;
+  }
 </style>
