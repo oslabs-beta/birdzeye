@@ -1,33 +1,33 @@
 <template>
-    <TheOpeningPage
-      v-if="displayOpen"
-      @close-open-page="switchToMain"
-      @save-root-dir="setRoot"
-      @root-name="getRootName"
-    />
-    <div 
-      v-else
-      class="components-wrapper"
-    >
-      <!-- <section>{{ projectRoot }}</section> -->
-      <!-- <img
-        alt="Birdzeye logo"
-        src="./assets/birdzeye.png"
-        height="200"
-        width="300"
-      /> -->
-      <section class="directory-comptree-wrapper">
-        <DirectoryContainer 
-          :rootdir="projectRoot" 
-          :directory-name="directoryName"
-        ></DirectoryContainer>
-        <TheComponentTreeContainer />
-      </section>
-      <section class="sim-tab-wrapper">
-        <TheSimulatorContainer />
-        <TheTabContainer :rootdir="projectRoot"/>
-      </section>
-    </div>
+  <TheOpeningPage
+    v-if="displayOpen"
+    @close-open-page="switchToMain"
+    @save-root-dir="setRoot"
+    @root-name="getRootName"
+  />
+  <div 
+    v-else
+    class="components-wrapper"
+  >
+    <!-- <section>{{ projectRoot }}</section> -->
+    <!-- <img
+      alt="Birdzeye logo"
+      src="./assets/birdzeye.png"
+      height="200"
+      width="300"
+    /> -->
+    <section class="directory-comptree-wrapper">
+      <DirectoryContainer 
+        :rootdir="projectRoot" 
+        :directory-name="directoryName"
+      ></DirectoryContainer>
+      <TheComponentTreeContainer />
+    </section>
+    <section class="sim-tab-wrapper">
+      <TheSimulatorContainer />
+      <TheTabContainer :rootdir="projectRoot"/>
+    </section>
+  </div>
 </template>
 
 <script>

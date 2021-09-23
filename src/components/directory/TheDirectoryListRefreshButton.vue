@@ -21,7 +21,7 @@ export default {
 </script>
 
 <style scoped>
-.material-icons.refresh { 
- 
-}
+  .material-icons.refresh { 
+    padding: 0 4px;
+  }
 </style>

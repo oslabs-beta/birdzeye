@@ -1,5 +1,5 @@
 <template>
-  <section id="file-tree">
+  <section class="file-tree">
     <div class="file-directory-title-wrapper">
       <h4 class="file-directory-title">File Directory</h4>
       <TheDirectoryListRefreshButton
@@ -30,18 +30,23 @@ export default {
 </script>
 
 <style>
+.file-tree {
+  background-color: #282a36;
+  color: #f8f8f2;
+  height: 40%;
+      overflow: scroll;
+}
 .file-directory-title-wrapper {
   display: flex;
+  border-bottom: solid 2px #273A4A;
+  padding: 4px 10px;
+  align-items: center;
 }
 .file-directory-title {
   font-weight: bold;
   margin-right: auto;
   opacity: .8;
-  padding: 4px
-}
-#file-tree {
-  background-color: #282a36;
-  color: #f8f8f2;
+  padding: 6px 8px;
 }
 button {
   background-color: #282a36;
@@ -55,5 +60,6 @@ section {
 h4 {
   font-size: 14px;
   margin: 0;
+  padding: 4px 10px;
 }
 </style>

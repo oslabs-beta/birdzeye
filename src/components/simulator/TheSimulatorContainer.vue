@@ -34,13 +34,15 @@ export default {
 <style scoped>
   #sim-bg {
     height: 30em;
-    width: 40em;
-    position: relative;
+    /* width: 40em; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   img {
     /* position: absolute; */
     text-align: center;
-    width: 300px;
+    width: 410px;
   }
   #sim {
     border: 1px;
