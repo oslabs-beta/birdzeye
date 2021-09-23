@@ -81,10 +81,13 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: rgb(255, 255, 255);
+  height: 100vh;
+  overflow: hidden;
 }
 .components-wrapper {
   display: flex;
   flex-wrap: wrap;
+  height: 100vh;
 }
 .directory-comptree-wrapper {
   width: 20%;

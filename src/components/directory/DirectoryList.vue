@@ -1,5 +1,5 @@
 <template>
-  <div class="dirlist-wrapper">
+  
     <directory
       :directory-name="directory"
       v-for="directory in allDirectories"
@@ -12,7 +12,7 @@
       :key="file"
       :parent-path="pathToDirectory"
     ></file>
-  </div>
+  
 </template>
 
 <script>
@@ -63,9 +63,6 @@ export default {
 };
 </script>
 
-<style scoped>
-.dirlist-wrapper {
-  padding: 3px 6px;;
-  overflow: scroll;
-}
+<style>
+
 </style>
