@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="dirlist-wrapper">
     <directory
       :directory-name="directory"
       v-for="directory in allDirectories"
@@ -24,7 +24,8 @@ export default {
   mounted() {
     // handle reply from the backend
     window.ipc.on("READ_DIRECTORY", (payload) => {
-      this.allDirectories = payload.contentFiles;
+      const noNode = payload.contentFiles.filter(el => el !== 'node_modules');
+      this.allDirectories = noNode;
     }),
       window.ipc.on("READ_FILE", (payload) => {
         this.allFiles = payload.contentFiles;
@@ -61,3 +62,10 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.dirlist-wrapper {
+  padding: 3px 6px;;
+  overflow: scroll;
+}
+</style>

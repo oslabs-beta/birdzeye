@@ -1,7 +1,5 @@
 <template>
-  <button @click="refreshDirectoryTree(filePath)">
-    Refresh
-  </button>
+  <span @click="refreshDirectoryTree(filePath)" class="material-icons refresh">refresh</span>
 </template>
 
 <script>
@@ -21,3 +19,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+  .material-icons.refresh { 
+    padding: 0 4px;
+  }
+</style>

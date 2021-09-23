@@ -40,7 +40,7 @@ export default {
       showInfo: false,
       componentInfoKeys: Object.keys(this.componentInfo)
         .sort()
-        .filter((e) => e !== "components"),
+        .filter((e) => e !== "components" || e !== "render"),
     };
   },
   methods: {
@@ -63,7 +63,10 @@ export default {
 </script>
 
 <style scoped>
-h2 {
-  color: white;
-}
+  button {
+    background-color: #282a36;
+    border: 0;
+    color: #f8f8f2;
+    font-weight: 600;
+  }
 </style>
