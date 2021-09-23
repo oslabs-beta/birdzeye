@@ -1,6 +1,10 @@
 {
-  "name": "vuety",
+  "name": "birdzeye",
+  "productName": "BIRDZ'EYE",
+  "author": "Team Vuety: Graham Pierce, Natsuki Wada, Brandon Bowers",
+  "description": "Dedicated Vue IDE",
   "version": "0.1.0",
+  "license": "ISC",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
