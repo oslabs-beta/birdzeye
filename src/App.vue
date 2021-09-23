@@ -1,23 +1,32 @@
 <template>
-  <div>
-    <TheOpeningPage
-      v-if="displayOpen"
-      @close-open-page="switchToMain"
-      @save-root-dir="setRoot"
-    />
-    <div v-else>
-      <div>{{ projectRoot }}</div>
-      <img
-        alt="Birdzeye logo"
-        src="./assets/birdzeye.png"
-        height="200"
-        width="300"
-      />
-      <DirectoryContainer :rootdir="projectRoot"></DirectoryContainer>
-      <TheSimulatorContainer />
+  <TheOpeningPage
+    v-if="displayOpen"
+    @close-open-page="switchToMain"
+    @save-root-dir="setRoot"
+    @root-name="getRootName"
+  />
+  <div 
+    v-else
+    class="components-wrapper"
+  >
+    <!-- <section>{{ projectRoot }}</section> -->
+    <!-- <img
+      alt="Birdzeye logo"
+      src="./assets/birdzeye.png"
+      height="200"
+      width="300"
+    /> -->
+    <section class="directory-comptree-wrapper">
+      <DirectoryContainer 
+        :rootdir="projectRoot" 
+        :directory-name="directoryName"
+      ></DirectoryContainer>
       <TheComponentTreeContainer />
+    </section>
+    <section class="sim-tab-wrapper">
+      <TheSimulatorContainer />
       <TheTabContainer :rootdir="projectRoot"/>
-    </div>
+    </section>
   </div>
 </template>
 
@@ -30,11 +39,11 @@ import TheOpeningPage from "./components/TheOpeningPage.vue";
 
 export default {
   name: "App",
-
   data() {
     return {
       displayOpen: true,
       projectRoot: "root",
+      directoryName: "",
     };
   },
   components: {
@@ -58,6 +67,10 @@ export default {
       //receive emit from opening page with root directory path
       this.projectRoot = rootDir;
     },
+    getRootName(rootName) {
+      //receive emit from opening page with root directory path
+      this.directoryName = rootName;
+    },
   },
 };
 </script>
@@ -67,9 +80,16 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-  background: "yellow";
+  color: rgb(255, 255, 255);
+}
+.components-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+.directory-comptree-wrapper {
+  width: 20%;
+}
+.sim-tab-wrapper {
+  width: 80%;
 }
 </style>

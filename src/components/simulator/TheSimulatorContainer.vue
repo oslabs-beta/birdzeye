@@ -1,15 +1,14 @@
 <template>
-<img
-        v-if="projecturl.length < 19 "
-        alt="Birdzeye logo"
-        src="../../assets/birdzeye.png"
-        height="400"
-        width="600"
-      />
+  <div 
+    v-if="projecturl.length < 19"
+    id="sim-bg"
+  >
+    <img src="../../assets/birdzeye.png" alt="Birdzeye">
+  </div>
   <iframe v-else id="sim" :src="projecturl"></iframe>
   <form @click.prevent="choosePort" @keydown.enter.prevent="choosePort">
     <input id="portChoice" placeholder="http://localhost:____/" v-model="portNumber">
-    <submit>Enter Port Number</submit>
+    <input id="submit-btn" type="submit" value="Enter Port Number">
   </form>
 </template>
 
@@ -33,13 +32,25 @@ export default {
 </script>
 
 <style scoped>
+  #sim-bg {
+    height: 30em;
+    /* width: 40em; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  img {
+    /* position: absolute; */
+    text-align: center;
+    width: 410px;
+  }
   #sim {
     border: 1px;
     background-color: rgb(40, 209, 49);
     height: 30em;
     width: 40em;
   }
-  submit {
-    background-color: white;
+  #submit-btn {
+
   }
 </style>

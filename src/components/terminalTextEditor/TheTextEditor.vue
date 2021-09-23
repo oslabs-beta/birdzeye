@@ -51,7 +51,7 @@ export default {
         "Ctrl-S": this.textEditorSave,
       } 
     })
-    this.cm.setSize("100%", "400");
+    this.cm.setSize("100%", "500");
     this.handleFileType(this.filePath);
   },
   updated() {
@@ -115,9 +115,17 @@ button {
   float: right;
 }
 section {
+  display: contents;
   text-align: left;
 }
 h2 {
   color: white;
+}
+.CodeMirror {
+    position: relative;
+    overflow: hidden;
+    background: white;
+    width: 100%;
+    height: 100vh;
 }
 </style>

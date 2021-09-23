@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="filename-wrapper">
     <button @click="handleSelectPath">{{ fileName }}</button>
     <!-- <right-click-form>Right Click Form</right-click-form> -->
   </div>
@@ -27,6 +27,8 @@ export default {
   },
   methods: {
     handleSelectPath() {
+      // console.log(document.getElementsByClassName('filename-wrapper'))
+      // document.querySelector('.filename-wrapper').classList.add('.active')
       const path = this.filePath;
       this.$store.dispatch("addFilePath", { path });
     },
@@ -35,7 +37,11 @@ export default {
 </script>
 
 <style scoped>
-h2 {
-  color: white;
+.filename-wrapper {
+  display: block;
+}
+.active {
+  background: red;
+  /* opacity: .6; */
 }
 </style>
