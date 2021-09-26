@@ -7,6 +7,7 @@
 <div align="center">
 <img src="https://img.shields.io/github/license/oslabs-beta/vuety">
 <img src="https://img.shields.io/github/last-commit/oslabs-beta/vuety">
+<img src="https://img.shields.io/github/stars/oslabs-beta/vuety?style=social">
 </div>
 
 <h4 align="center"> Dedicated Vue IDE built to streamline your development process 
