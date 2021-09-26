@@ -5,6 +5,7 @@
 <h2 align="center">BIRDZ'EYE</h2>
 
 <div align="center">
+<img src="https://img.shields.io/github/license/oslabs-beta/vuety">
 </div>
 
 ---
