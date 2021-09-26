@@ -1,19 +1,18 @@
 <p align="center">
  <img src="https://github.com/oslabs-beta/vuety/raw/dev/src/assets/birdzeye.png" alt="BIRDZ'EYE logo">
 </p>
-<h5 align="right" font-weight="light">Logo by Natsuki Wada</h5>
-<h3 align="center">BIRDZ'EYE</h3>
+<h4 align="right" font-weight="400">Logo by Natsuki Wada</h4>
+<h2 align="center">BIRDZ'EYE</h2>
 
 <div align="center">
-
 </div>
 
 ---
 
-<p align="center"> Dedicated Vue IDE built to streamline your development process 
+<h4 align="center"> Dedicated Vue IDE built to streamline your development process 
     <br> 
     <br>
-</p>
+</h4>
 
 <!-- ABOUT THE PROJECT -->
 
