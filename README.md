@@ -1,22 +1,19 @@
-## vuety
-
 <p align="center">
- <img src="https://github.com/oslabs-beta/vuety/raw/dev/src/assets/birdzeye2.png" alt="BIRDZ'EYE logo">
+ <img src="https://github.com/oslabs-beta/vuety/raw/dev/src/assets/birdzeye.png" alt="BIRDZ'EYE logo" width="500" height="500">
 </p>
-<h4 align="right">Logo by Natsuki Wada</h4>
-<h3 align="center">BIRDZ'EYE by Team Vuety</h3>
+<p align="right">Logo Design by <a href="https://github.com/wachka06">Natsuki Wada</a></p>
+<h2 align="center">BIRDZ'EYE</h2>
 
 <div align="center">
-
+<img src="https://img.shields.io/github/license/oslabs-beta/vuety">
+<img src="https://img.shields.io/github/last-commit/oslabs-beta/vuety">
+<img src="https://img.shields.io/github/stars/oslabs-beta/vuety?style=social">
 </div>
 
----
-
-<p align="center"> Dedicated Vue IDE built to streamline your development process 
-    <br> 
-    <br>
-  
-</p>
+<h4 align="center"> Dedicated Vue IDE built to streamline your development process 
+  <br> 
+  <br>
+</h4>
 
 <!-- ABOUT THE PROJECT -->
 
@@ -73,14 +70,18 @@
 ## Using the App
 
 1.  When the application opens, you will see the words, "Open Project". Click on this to choose the root directory for your project. After choosing the root directory, the main page of the app, with the text editor, file tree, component tree, and simulator will appear. (The simulator will initially just be the BIRDZ'EYE logo.)
-
+<img src="https://github.com/oslabs-beta/vuety/raw/dev/src/assets/opening_page.png" alt="BIRDZ'EYE opening page">
 2.  In order to initiate the text editor, click on a file in the file tree, and then click the circular arrow button on the right side of the screen. The file contents will appear on the bottom of the screen.
-
+<img src="https://github.com/oslabs-beta/vuety/raw/dev/src/assets/runtextbutton.png" alt="BIRDZ'EYE run text">
+<img src="https://github.com/oslabs-beta/vuety/raw/dev/src/assets/opening_page2.png" alt="BIRDZ'EYE main page">
 3.  The two-way arrow button toggles between the text editor and the terminal. You can use the terminal to run the command you need to start your application's local server. After typing in the command, click the running person icon to run the command.
-
+<img src="https://github.com/oslabs-beta/vuety/raw/dev/src/assets/togglebutton.png" alt="BIRDZ'EYE toggle button">
+<img src="https://github.com/oslabs-beta/vuety/raw/dev/src/assets/terminal.png" alt="BIRDZ'EYE terminal">
 4.  Once you've started up your server, you can enter a port number in the text field on the left. You only need to enter the number, the "http://localhost:" will be entered automatically. After doing this, your application should replace the BIRDZ'EYE logo.
+<img src="https://github.com/oslabs-beta/vuety/raw/dev/src/assets/portchoicebutton.png" alt="BIRDZ'EYE port choice">
 
 5.  You can save edits to your file in the text editor either by using the down arrow button on the right, or by using "control + s".
+<img src="https://github.com/oslabs-beta/vuety/raw/dev/src/assets/savebutton.png" alt="BIRDZ'EYE save button">
 
 6.  You can view component properties by clicking on the component's name in the component tree.
 
