@@ -1,5 +1,5 @@
 <p align="center">
- <img src="https://github.com/oslabs-beta/vuety/raw/dev/src/assets/birdzeye.png" alt="BIRDZ'EYE logo" width="300" height="300">
+ <img src="https://github.com/oslabs-beta/vuety/raw/dev/src/assets/birdzeye.png" alt="BIRDZ'EYE logo" width="500" height="500">
 </p>
 <p align="right">Logo Design by <a href="https://github.com/wachka06">Natsuki Wada</a></p>
 <h2 align="center">BIRDZ'EYE</h2>
