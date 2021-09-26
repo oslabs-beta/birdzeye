@@ -1,10 +1,8 @@
-## vuety
-
 <p align="center">
- <img src="https://github.com/oslabs-beta/vuety/raw/dev/src/assets/birdzeye2.png" alt="BIRDZ'EYE logo">
+ <img src="https://github.com/oslabs-beta/vuety/raw/dev/src/assets/birdzeye.png" alt="BIRDZ'EYE logo">
 </p>
-<h4 align="right">Logo by Natsuki Wada</h4>
-<h3 align="center">BIRDZ'EYE by Team Vuety</h3>
+<h5 align="right" font-weight="light">Logo by Natsuki Wada</h5>
+<h3 align="center">BIRDZ'EYE</h3>
 
 <div align="center">
 
@@ -15,7 +13,6 @@
 <p align="center"> Dedicated Vue IDE built to streamline your development process 
     <br> 
     <br>
-  
 </p>
 
 <!-- ABOUT THE PROJECT -->
