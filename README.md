@@ -1,7 +1,7 @@
 <p align="center">
  <img src="https://github.com/oslabs-beta/vuety/raw/dev/src/assets/birdzeye.png" alt="BIRDZ'EYE logo">
 </p>
-<p align="right">Logo Design by Natsuki Wada</p>
+<p align="right">Logo Design by [Natsuki Wada](https://github.com/wachka06)</p>
 <h2 align="center">BIRDZ'EYE</h2>
 
 <div align="center">
