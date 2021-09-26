@@ -20,6 +20,7 @@
 
 <script>
 import AppChildComponent from "./AppChildComponent.vue";
+// import App from "../../../../cmp-communication-assignment-problem/src/App.vue";
 import App from "../../App.vue";
 // import InitComponentTreeButton from "./InitComponentTreeButton.vue";
 // import App from {this.appPath}
