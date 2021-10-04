@@ -19,60 +19,44 @@
 </template>
 
 <script>
-import AppChildComponent from "./AppChildComponent.vue";
-<<<<<<< HEAD
-import App from "../../../../cmp-communication-assignment-problem/src/components/App.vue";
-=======
-// import App from "../../../../cmp-communication-assignment-problem/src/App.vue";
-import App from "../../App.vue";
->>>>>>> 831e4caf6e961007872906bd87d5fc41e5b2f568
-// import InitComponentTreeButton from "./InitComponentTreeButton.vue";
-// import App from {this.appPath}
-// let pathToApp;
-// import { defineAsyncComponent } from "vue";
-// const App = () => import(pathToApp);
-// const App = () => import(`${pathApp}`);
+import AppChildComponent from './AppChildComponent.vue';
+// plan to make import location dynamic in future updates
+
+//update with the location of your Vue applications root component
+import App from '../../App.vue';
 
 export default {
-  // name: "App",
-  // props: {
-  //   app:{
-  //     type: String,
-  //     required:true
-  //   }
-  // },
-  // computed: {
-  //   comp(){
-  //     return defineAsyncComponent from (() => (`@/`))
-  //   }
-  // },
   mounted() {
-    window.ipc.on("GET_APP_PATH", (payload) => {
-      if (payload.path) {
-        this.pathApp = payload.path;
-      } else {
-        //If user hits 'cancel', don't do anything so that they can press the button again
-        return;
-      }
-      // this.getChildrenComponents(App);
-    });
+    //on mount, establish ipc listener to listen for the file location of the path from the electron dialoge box
+    //will be incorporated in a future update...
+
+    // window.ipc.on("GET_APP_PATH", (payload) => {
+    //   if (payload.path) {
+    //     this.pathApp = payload.path;
+    //   } else {
+    //     //If user hits 'cancel', don't do anything so that they can press the button again
+    //     return;
+    //   }
+    //   // this.getChildrenComponents(App);
+    // });
+
+    //this method is invoked on mount to populate the childComponentObj and childComponentNameList data properties
     this.getChildrenComponents(App);
   },
   components: {
     AppChildComponent,
-    // InitComponentTreeButton,
-    // App: defineAsyncComponent(() => import(`${pathApp}`)),
   },
   data() {
     return {
-      pathApp: "",
+      //updated with the object exported from the location of the root component file
       childComponentsObj: {},
+      //used in the v-for loop to create app-child-component components with the names of the component files
       childComponentNameList: [],
     };
   },
   methods: {
     getChildrenComponents(parentComponent) {
-      //if the parent has children, in this case app
+      //if the parent has children
       if (parentComponent.components) {
         //store the info about all the parent's children in an object
         this.childComponentsObj = parentComponent.components;
@@ -80,48 +64,51 @@ export default {
         this.childComponentNameList = Object.keys(parentComponent.components);
       }
     },
-    getAppRoot() {
-      window.ipc.send("GET_APP_PATH");
-    },
+
+    //******** Will incorporate in a future update ********/
+
+    // getAppRoot() {
+    //   window.ipc.send("GET_APP_PATH");
+    // },
   },
 };
 </script>
 
 <style scoped>
-  .cmp-tree-list-wrapper {
-    background-color: #282a36;
-    color: #f8f8f2;
-    margin-top: 6px;
-    height: 59%;
-    overflow: scroll;
-    position: relative;
-    object-fit: contain;
-  }
-  .cmp-tree-title-wrapper {
-    display: flex;
-    border-bottom: solid 2px #273A4A;
-    padding: 4px 10px;  
-  }
-  .cmp-tree-title {
-    font-weight: bold;
-    margin-right: auto;
-    opacity: .8;
-    padding: 6px 8px;
-  }
-  .cmp-tree {
-    position: absolute;
-    height: auto;
-    width: 100%;
-    padding-left: 10px;
-    padding-top: 10px;
-  }
-  .app-child-cmp {
-    padding: 4px 10px;
-  }
-  button {
-    background-color: #282a36;
-    border: 0;
-    color: #f8f8f2;
-    font-weight: 600;
-  }
+.cmp-tree-list-wrapper {
+  background-color: #282a36;
+  color: #f8f8f2;
+  margin-top: 6px;
+  height: 59%;
+  overflow: scroll;
+  position: relative;
+  object-fit: contain;
+}
+.cmp-tree-title-wrapper {
+  display: flex;
+  border-bottom: solid 2px #273a4a;
+  padding: 4px 10px;
+}
+.cmp-tree-title {
+  font-weight: bold;
+  margin-right: auto;
+  opacity: 0.8;
+  padding: 6px 8px;
+}
+.cmp-tree {
+  position: absolute;
+  height: auto;
+  width: 100%;
+  padding-left: 10px;
+  padding-top: 10px;
+}
+.app-child-cmp {
+  padding: 4px 10px;
+}
+button {
+  background-color: #282a36;
+  border: 0;
+  color: #f8f8f2;
+  font-weight: 600;
+}
 </style>
