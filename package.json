@@ -13,7 +13,8 @@
     "electron:serve": "vue-cli-service electron:serve",
     "postinstall": "electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps",
-    "rebuild": "electron-rebuild"
+    "rebuild": "electron-rebuild",
+    "test": "jest"
   },
   "main": "background.js",
   "dependencies": {

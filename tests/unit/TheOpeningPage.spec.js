@@ -1,6 +1,7 @@
-import { shallowMount } from '@vue/test-utils'
-import TheOpeningPage from '@/components/TheOpeningPage.vue'
+import { shallowMount } from '@vue/test-utils';
+import TheOpeningPage from '@/components/TheOpeningPage.vue';
 
+// ipc.on in mounted() is not being recognized in tests and is messing up the tests in this file
 describe('TheOpeningPage.vue', () => {
   let wrapper
   beforeEach(() => {
