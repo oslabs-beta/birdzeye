@@ -15,19 +15,32 @@ export default {
     }
   },
   mounted() {
+    this.setRoot()
     // If user chooses directory, derender opening window component and save file path to rootDir property
-    window.ipc.on("OPEN_FILE_DIALOG", (payload) => {
-      if (payload.rootDir) {
-        this.rootDir = payload.rootDir;
-        this.rootName = this.getHomeDirectory(this.rootDir);
-        this.goToMain();
-      } else {
-        //If user hits 'cancel', don't do anything so that they can press the button again
-        return ;
-      }
-    })
+    // window.ipc.on("OPEN_FILE_DIALOG", (payload) => {
+    //   if (payload.rootDir) {
+    //     this.rootDir = payload.rootDir;
+    //     this.rootName = this.getHomeDirectory(this.rootDir);
+    //     this.goToMain();
+    //   } else {
+    //     //If user hits 'cancel', don't do anything so that they can press the button again
+    //     return ;
+    //   }
+    // })
   },
   methods: {
+    setRoot() {
+      window.ipc.on("OPEN_FILE_DIALOG", (payload) => {
+        if (payload.rootDir) {
+          this.rootDir = payload.rootDir;
+          this.rootName = this.getHomeDirectory(this.rootDir);
+          this.goToMain();
+        } else {
+          //If user hits 'cancel', don't do anything so that they can press the button again
+          return ;
+        }
+      })
+    },
     rootDirPrompt() {
       //Request to backend to open dialog so user can choose root directory
       window.ipc.send("OPEN_FILE_DIALOG");
