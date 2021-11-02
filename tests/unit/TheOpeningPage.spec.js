@@ -1,26 +1,24 @@
 import { shallowMount } from '@vue/test-utils';
 import TheOpeningPage from '@/components/TheOpeningPage.vue';
 
-// ipc.on in mounted() is not being recognized in tests and is messing up the tests in this file
 describe('TheOpeningPage.vue', () => {
-  let wrapper
-  beforeEach(() => {
-    wrapper = shallowMount(TheOpeningPage)
-  })
+  
+  TheOpeningPage.methods.setRoot = jest.fn()
+  let wrapper = shallowMount(TheOpeningPage);
+
 
   it('has a button', () => {
-    // const wrapper = shallowMount(TheOpeningPage)
-
-    expect(wrapper.vm.contains('button')).toBe(true)
+    
+    expect(wrapper.html('button')).toBe("<section><button>Open Project</button><img alt=\"birdzeye logo\" src=\"\"></section>")
   })
 
   it('rootDir is empty string by default', () => {
-    // const wrapper = shallowMount(TheOpeningPage)
+    
     expect(wrapper.vm.rootDir).toBe('')
   })
 
   it('rootName is empty string by default', () => {
-    // const wrapper = shallowMount(TheOpeningPage)
+    
     expect(wrapper.vm.rootName).toBe('')
   })
 })
