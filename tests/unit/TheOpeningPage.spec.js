@@ -3,7 +3,7 @@ import TheOpeningPage from '@/components/TheOpeningPage.vue';
 
 describe('TheOpeningPage.vue', () => {
   
-  TheOpeningPage.methods.setRoot = jest.fn()
+  TheOpeningPage.methods.setRoot = jest.fn();
   let wrapper = shallowMount(TheOpeningPage);
 
 
