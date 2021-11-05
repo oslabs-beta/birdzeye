@@ -3,7 +3,12 @@ import TheOpeningPage from '@/components/TheOpeningPage.vue';
 
 describe('TheOpeningPage.vue', () => {
   
-  TheOpeningPage.methods.setRoot = jest.fn();
+  // TheOpeningPage.methods.setRoot = jest.fn();
+  
+  TheOpeningPage.methods.setRoot = jest.fn((path) => {
+    TheOpeningPage.rootDir = path;
+    TheOpeningPage.rootName = TheOpeningPage.methods.getHomeDirectory(path);
+  });
   let wrapper = shallowMount(TheOpeningPage);
 
 
@@ -20,5 +25,10 @@ describe('TheOpeningPage.vue', () => {
   it('rootName is empty string by default', () => {
     
     expect(wrapper.vm.rootName).toBe('')
+  })
+  wrapper.vm.setRoot('/someFolder/rootFolder');
+  it('should save file path to rootDir and the root folder name to rootName', () => {
+    expect(wrapper.vm.rootDir).toBe('/someFolder/rootFolder')
+    expect(wrapper.vm.rootName).toBe('rootFolder')
   })
 })
