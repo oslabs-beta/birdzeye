@@ -3,13 +3,50 @@ import TheOpeningPage from '@/components/TheOpeningPage.vue';
 
 describe('TheOpeningPage.vue', () => {
   
-  // TheOpeningPage.methods.setRoot = jest.fn();
+  TheOpeningPage.methods.setRoot = jest.fn();
   
-  TheOpeningPage.methods.setRoot = jest.fn((path) => {
-    TheOpeningPage.rootDir = path;
-    TheOpeningPage.rootName = TheOpeningPage.methods.getHomeDirectory(path);
+  // TheOpeningPage.methods.setRoot = jest.fn((path) => {
+  //   TheOpeningPage.rootDir = path;
+  //   // TheOpeningPage.rootName = TheOpeningPage.methods.getHomeDirectory(path);
+     
+  //   const mockgetHomeDirectory = (filePath) => {
+  //     let slashPos = 0;
+  //     console.log(filePath, 'filePath in mockgetHomeDir');
+  //     if (filePath) {
+  //       for (let i = filePath.length; i > 0; i--) {
+  //         if (filePath[i] === '/') {
+  //           slashPos = i;
+  //           break;
+  //         }
+  //       }
+  //     } 
+  //     return filePath.slice(slashPos + 1);
+  //   }
+  //   TheOpeningPage.rootName = mockgetHomeDirectory(path)
+  // });
+  let wrapper = shallowMount(TheOpeningPage, {
+    //methods: {
+      setRoot: jest.fn((path) => {
+        wrapper.vm.rootDir = path;
+        // TheOpeningPage.rootName = TheOpeningPage.methods.getHomeDirectory(path);
+         
+        const mockgetHomeDirectory = (filePath) => {
+          let slashPos = 0;
+          console.log(filePath, 'filePath in mockgetHomeDir');
+          if (filePath) {
+            for (let i = filePath.length; i > 0; i--) {
+              if (filePath[i] === '/') {
+                slashPos = i;
+                break;
+              }
+            }
+          } 
+          return filePath.slice(slashPos + 1);
+        }
+        wrapper.vm.rootName = mockgetHomeDirectory(path)
+      })
+    //}
   });
-  let wrapper = shallowMount(TheOpeningPage);
 
 
   it('has a button', () => {
