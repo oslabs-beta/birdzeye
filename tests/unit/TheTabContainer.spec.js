@@ -9,12 +9,12 @@ describe('TheTabContainer.vue', () => {
     wrapper = shallowMount(TheTabContainer)
   })
 
-  it('showTerm is false by default', () => {
+  test('that showTerm is false by default', () => {
     
     expect(wrapper.vm.showTerm).toBe(false)
   })
 
-  it('showText is true by default', () => {
+  test('that showText is true by default', () => {
     
     expect(wrapper.vm.showText).toBe(true)
   })

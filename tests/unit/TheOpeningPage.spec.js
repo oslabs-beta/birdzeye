@@ -5,67 +5,25 @@ describe('TheOpeningPage.vue', () => {
   
   TheOpeningPage.methods.setRoot = jest.fn();
   
-  // TheOpeningPage.methods.setRoot = jest.fn((path) => {
-  //   TheOpeningPage.rootDir = path;
-  //   // TheOpeningPage.rootName = TheOpeningPage.methods.getHomeDirectory(path);
-     
-  //   const mockgetHomeDirectory = (filePath) => {
-  //     let slashPos = 0;
-  //     console.log(filePath, 'filePath in mockgetHomeDir');
-  //     if (filePath) {
-  //       for (let i = filePath.length; i > 0; i--) {
-  //         if (filePath[i] === '/') {
-  //           slashPos = i;
-  //           break;
-  //         }
-  //       }
-  //     } 
-  //     return filePath.slice(slashPos + 1);
-  //   }
-  //   TheOpeningPage.rootName = mockgetHomeDirectory(path)
-  // });
-  let wrapper = shallowMount(TheOpeningPage, {
-    //methods: {
-      setRoot: jest.fn((path) => {
-        wrapper.vm.rootDir = path;
-        // TheOpeningPage.rootName = TheOpeningPage.methods.getHomeDirectory(path);
-         
-        const mockgetHomeDirectory = (filePath) => {
-          let slashPos = 0;
-          console.log(filePath, 'filePath in mockgetHomeDir');
-          if (filePath) {
-            for (let i = filePath.length; i > 0; i--) {
-              if (filePath[i] === '/') {
-                slashPos = i;
-                break;
-              }
-            }
-          } 
-          return filePath.slice(slashPos + 1);
-        }
-        wrapper.vm.rootName = mockgetHomeDirectory(path)
-      })
-    //}
-  });
+  
+  let wrapper = shallowMount(TheOpeningPage);
 
-
-  it('has a button', () => {
+  test('that it renders a button for the user to click', () => {
     
     expect(wrapper.html('button')).toBe("<section><button>Open Project</button><img alt=\"birdzeye logo\" src=\"\"></section>")
   })
 
-  it('rootDir is empty string by default', () => {
+  test('that rootDir is empty string by default', () => {
     
     expect(wrapper.vm.rootDir).toBe('')
   })
 
-  it('rootName is empty string by default', () => {
+  test('that rootName is empty string by default', () => {
     
     expect(wrapper.vm.rootName).toBe('')
   })
-  wrapper.vm.setRoot('/someFolder/rootFolder');
-  it('should save file path to rootDir and the root folder name to rootName', () => {
-    expect(wrapper.vm.rootDir).toBe('/someFolder/rootFolder')
-    expect(wrapper.vm.rootName).toBe('rootFolder')
+  
+  test('that getHomeDirectory takes a file path string and returns the name of the root directory', () => {
+    expect(wrapper.vm.getHomeDirectory('/someFolder/rootFolder')).toBe('rootFolder')
   })
 })
