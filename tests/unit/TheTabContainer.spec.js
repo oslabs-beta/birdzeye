@@ -18,5 +18,11 @@ describe('TheTabContainer.vue', () => {
     
     expect(wrapper.vm.showText).toBe(true)
   })
+
+  test('that clicking the toggle runs setDisplay and changes properties showTerm and showText', async () => {
+    await wrapper.find('span').trigger('click')
+    expect(wrapper.vm.showTerm).toBe(true)
+    expect(wrapper.vm.showText).toBe(false)
+  })
   
 })
