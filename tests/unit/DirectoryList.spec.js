@@ -6,6 +6,7 @@ describe('DirectoryList component', () => {
   DirectoryList.methods.getFiles = jest.fn();
   DirectoryList.methods.readDirectory = jest.fn();
   DirectoryList.methods.readFile = jest.fn();
+  
   let wrapper = shallowMount(DirectoryList, {
     propsData: {
       rootdir: '/folderA/folderB'

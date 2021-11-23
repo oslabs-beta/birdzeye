@@ -25,15 +25,11 @@ import File from "./File.vue";
 export default {
   mounted() {
     // handle reply from the backend for files
-    window.ipc.on("READ_SUBFILE", (payload) => {
-      if (payload.rootFileName === this.path)
-        this.allFiles.push(...payload.contentFiles);
-    }),
-      // handle reply from the backend for directories
-      window.ipc.on("READ_SUBDIRECTORY", (payload) => {
-        if (payload.rootDirectoryName === this.path)
-          this.allSubDirectories.push(...payload.contentFiles);
-      });
+    this.readSubfile()
+    
+    // handle reply from the backend for directories
+    this.readSubDirectory()
+      
     //methods used to make request to backend
     this.getSubDirectories(this.path);
     this.getFiles(this.path);
@@ -75,6 +71,18 @@ export default {
         window.ipc.send("READ_SUBFILE", payload);
       }
     },
+    readSubfile() {
+      window.ipc.on("READ_SUBFILE", (payload) => {
+      if (payload.rootFileName === this.path)
+      this.allFiles.push(...payload.contentFiles);
+    })
+    },
+    readSubDirectory() {
+      window.ipc.on("READ_SUBDIRECTORY", (payload) => {
+      if (payload.rootDirectoryName === this.path)
+      this.allSubDirectories.push(...payload.contentFiles);
+      })
+    }
   },
 };
 </script>
