@@ -23,14 +23,10 @@ export default {
   props: ["rootdir"],
   mounted() {
     // handle reply from the backend
-    window.ipc.on("READ_DIRECTORY", (payload) => {
-      const noNode = payload.contentFiles.filter(el => el !== 'node_modules');
-      this.allDirectories = noNode;
-    }),
-      window.ipc.on("READ_FILE", (payload) => {
-        this.allFiles = payload.contentFiles;
-      });
-
+    this.readDirectory()
+    
+    this.readFile()
+    
     //this.directory is the file path passed from the pop up on the opening page
     this.getDirectories(this.pathToDirectory);
 
@@ -59,6 +55,17 @@ export default {
       const payload = { path };
       window.ipc.send("READ_FILE", payload);
     },
+    readDirectory() {
+      window.ipc.on("READ_DIRECTORY", (payload) => {
+      const noNode = payload.contentFiles.filter(el => el !== 'node_modules');
+      this.allDirectories = noNode;
+    })
+    },
+    readFile() {
+      window.ipc.on("READ_FILE", (payload) => {
+      this.allFiles = payload.contentFiles;
+      })
+    }
   },
 };
 </script>
